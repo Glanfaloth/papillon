@@ -1,30 +1,43 @@
 import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
-import { JoinOptions } from '@papillon/helpers/lib/types';
+import { GlobalState, JoinOptions } from "@papillon/helpers/lib/types";
 
 export class MyRoom extends Room<MyRoomState> {
-
-  onCreate (options: any) {
-    this.setState(new MyRoomState());
+  onCreate(options: JoinOptions) {
+    this.setState(
+      new MyRoomState({
+        byUser: { [options.username]: {} },
+        step: { type: "waiting", properties: undefined },
+      })
+    );
 
     this.onMessage("type", (client, message) => {
       //
       // handle "type" message
       //
     });
-
   }
 
-  onJoin (client: Client, options: JoinOptions): void {
-    console.log(client.sessionId, "joined!", options);
+  onJoin(client: Client, options: JoinOptions): void {
+    const state = this.state.getState();
+
+    if (state) {
+      this.setState(
+        new MyRoomState({
+          ...state,
+          byUser: { ...state.byUser, [options.username]: {} },
+        })
+      );
+    } else {
+      this.onCreate(options);
+    }
   }
 
-  onLeave (client: Client, consented: boolean) {
+  onLeave(client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
   }
 
   onDispose() {
     console.log("room", this.roomId, "disposing...");
   }
-
 }
