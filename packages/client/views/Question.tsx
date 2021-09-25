@@ -41,11 +41,17 @@ export default function Question() {
           value={answer}
           onChange={(e) => {
             setAnswer(e.target.value);
-            answer.match(regexFromWordList) != null && setWordCount(answer.match(regexFromWordList).length);
+            answer.match(regexFromWordList) != null
+              ? setWordCount(answer.match(regexFromWordList).length)
+              : setWordCount(0);
           }}
         ></textarea>
       </div>
-      {wordCount > 0 && <h2 className="text-red-600">{wordCount} words too similar, you'll be penalized.</h2>}
+      {wordCount > 0 && (
+        <h2 className="text-red-600">
+          {wordCount} words too similar, you'll be penalized.
+        </h2>
+      )}
       <Button
         className={progressPercentage < 33 && "animate-ping"}
         variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
