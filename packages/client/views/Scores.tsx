@@ -37,7 +37,6 @@ const bar_color = ["#cb4335", "#28b463", "#3498db", "#f1c40f"]
 export default function Scores() {
   const sortedData = _.sortBy(data, (o: typeof data[0]) => -1 * o.points);
   return (
-
     <div className="bg-gradient-to-r from-green-200 to-blue-300 overflow-hidden">
       <div className="shadow-lg rounded-xl bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 p-8">
         <h1>Scores</h1>
