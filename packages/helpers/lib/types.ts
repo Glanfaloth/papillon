@@ -59,7 +59,7 @@ export type Step =
         };
       };
     }
-  | { type: "end-screen"; properties: { resultByUser: { score: number } } };
+  | { type: "end-screen"; properties: undefined };
 
 export type DescriptionSubmission = {
   word: string;
