@@ -8,7 +8,7 @@ export default function Homepage() {
   const { connectToClient, state } = useColyseus();
 
   const disabled = !username;
-  const userSubmittedName = !!state.username
+  const userSubmittedName = !!state?.username
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">

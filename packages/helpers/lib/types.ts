@@ -2,10 +2,28 @@ export type JoinOptions = {
   username: string;
 };
 
-export type ClientToServerMessageUnion = {
-  type: "question-answer";
-  properties: {};
+export type SubmitDescriptionMessage = {
+  type: "submit-description";
+  properties: {
+    username: string;
+    word: string;
+    description: string;
+    score: number;
+  };
 };
+
+export type ChooseWordMessage  = {
+  type: "choose-word";
+  properties: {
+    username: string;
+    descriptionAuthorUsername: string;
+    word: string;
+    description: string;
+    score: number;
+  };
+}
+
+export type ClientToServerMessageUnion = SubmitDescriptionMessage | ChooseWordMessage
 
 export type WriteDescriptionData = {
   word: string;
@@ -41,11 +59,12 @@ export type Step =
   | { type: "end-screen"; properties: { resultByUser: { score: number } } };
 
 export type DescriptionSubmission = {
-  word: string,
-  description: string
-}
+  word: string;
+  description: string;
+  isAuthor: boolean
+};
 
-export type UserState = { score?: number, seenWords: DescriptionSubmission[] };
+export type UserState = { score: number; seenWords: DescriptionSubmission[] };
 
 export type GlobalState = {
   byUser: {
