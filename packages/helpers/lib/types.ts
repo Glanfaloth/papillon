@@ -1,5 +1,6 @@
 export type JoinOptions = {
   username: string;
+  roomId: string;
 };
 
 export type SubmitDescriptionMessage = {
