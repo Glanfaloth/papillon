@@ -1,0 +1,29 @@
+{
+  "name": "@papillon/helpers",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Elyes <elyes@sanalabs.com>",
+  "homepage": "https://github.com/TKGZ/papillon#readme",
+  "license": "ISC",
+  "main": "lib/helpers.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TKGZ/papillon.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/TKGZ/papillon/issues"
+  },
+  "dependencies": {
+    "typescript": "^4.4.3"
+  }
+}
