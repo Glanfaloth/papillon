@@ -10,6 +10,7 @@ export default function Question() {
   const disabled = !answer;
   const [wordCount, setWordCount] = useState(0);
   const wordList = ["hello", "world"];
+  const [submitted, setSubmitted] = useState(false);
   var regexFromWordList = new RegExp(wordList.join("|"), "gi");
 
   const state = useContext(ColyseusContext);
@@ -43,7 +44,6 @@ export default function Question() {
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
       </h3>
-
       <div className="has-tooltip">
         <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
           speak, say, talk
@@ -55,7 +55,7 @@ export default function Question() {
           </h2>
         </div>
       </div>
-      <div className="container">
+      <div className="container ">
         <div className="backdrop">
           <span
             dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
@@ -63,7 +63,9 @@ export default function Question() {
           ></span>
         </div>
         <textarea
-          className="border-gray-400 border-2 w-full"
+          className={`border-gray-400 border-2 w-full ${
+            submitted && "text-gray-500"
+          }`}
           name="description"
           value={answer}
           onChange={(e) => {
@@ -79,33 +81,32 @@ export default function Question() {
           {wordCount} words too similar, you'll be penalized.
         </h2>
       )}
-      <div>
-        {progressPercentage < 20 && (
+      <div className="mt-10">
+        {progressPercentage < 20 && !submitted && (
           <Button
             className={progressPercentage < 20 && "animate-weakPing"}
-            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
-            onClick={() => {
-              if (!disabled) {
-                sendMessage({
-                  type: "submit-description",
-                  properties: {
-                    username: state.username ?? 0,
-                    word: "",
-                    score: 0,
-                    description: answer
-                  }
-                });
-              }
-            }}
+            variant={
+              submitted ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY
+            }
           >
             Submit
           </Button>
         )}
         <div className={progressPercentage < 20 && "absolute"}>
           <Button
-            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
+            variant={submitted ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
             onClick={() => {
-              if (!disabled) {
+              if (!submitted) {
+                setSubmitted(true);
+                sendMessage({
+                  type: "submit-description",
+                  properties: {
+                    username: state.username ?? 0,
+                    word: "",
+                    score: 0,
+                    description: answer,
+                  },
+                });
               }
             }}
           >

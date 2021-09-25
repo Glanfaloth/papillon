@@ -1,10 +1,10 @@
 // Colyseus + Express
 import { Server } from "colyseus";
-import { WebSocketTransport } from "@colyseus/ws-transport"
+import { WebSocketTransport } from "@colyseus/ws-transport";
 import { createServer } from "http";
 import express from "express";
 import { MyRoom } from "./rooms/MyRoom";
-import { ROOM_NAME } from "@papillon/helpers/lib/const";
+import _ from "lodash";
 
 const port = 2567;
 
@@ -17,6 +17,8 @@ const gameServer = new Server({
   }),
 });
 
-gameServer.define(ROOM_NAME, MyRoom);
+_.range(100).forEach((i) => {
+  gameServer.define(`${i}`, MyRoom);
+});
 
 gameServer.listen(port);

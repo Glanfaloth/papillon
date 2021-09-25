@@ -8,12 +8,16 @@ export enum ButtonVariant {
   CORRECT = "correct",
   INCORRECT = "incorrect",
   LIGHT = "light",
+  DISABLED = "disabled",
 }
 
 const getButtonClasses = (variant: ButtonVariant): string => {
   switch (variant) {
     case ButtonVariant.DANGER: {
       return "bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200";
+    }
+    case ButtonVariant.DISABLED: {
+      return "bg-gray-500 focus:ring-offset-red-200";
     }
     case ButtonVariant.WARNING: {
       return "bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500 focus:ring-offset-yellow-200";
