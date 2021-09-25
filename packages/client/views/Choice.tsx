@@ -4,7 +4,7 @@ import { ProgressBar } from "../components/ProgressBar";
 
 export default function Choice() {
   return (
-    <div className="bg-gradient-to-r from-purple-400 via-red-500 to-white-500 page-view overflow-hidden">
+    <div className="bg-gradient-to-r from-purple-400 via-red-500 to-white-500 overflow-hidden">
     <div className="shadow-lg rounded-xl bg-gradient-to-r from-green-200 to-blue-300 p-8">
       <ProgressBar progressPercentage={80} isDanger={false} />
       <h2>30 seconds left</h2>

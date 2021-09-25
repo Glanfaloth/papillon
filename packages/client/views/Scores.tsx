@@ -34,7 +34,7 @@ const data = [
 export default function Scores() {
   const sortedData = _.sortBy(data, (o: typeof data[0]) => -1 * o.points);
   return (
-    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 page-view overflow-hidden">
+    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 overflow-hidden">
       <h1>Scores</h1>
       <BarChart width={300} height={100} data={sortedData}>
         <Bar dataKey="points" fill="white" />
