@@ -13,12 +13,11 @@ export default function Question() {
         How would you describe the following word?
       </h3>
       <h1>Sprechen</h1>
-      <input
-        type="text"
+      <textarea
+        className="border-gray-400 border-2 w-full"
         name="description"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
-        className="w-full"
       />
       <Button
         variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}

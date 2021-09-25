@@ -7,6 +7,11 @@ export type ClientToServerMessageUnion = {
   properties: {};
 };
 
+export type QuestionData = {
+  word: string;
+  similarWords: [];
+};
+
 export type Step =
   | { type: "waiting"; properties: undefined }
   | {
@@ -35,3 +40,5 @@ export type StateForUser = {
 export interface RawState {
   state: string;
 }
+
+export const questions: QuestionData[] = [];
