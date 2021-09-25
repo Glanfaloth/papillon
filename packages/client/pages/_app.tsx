@@ -8,5 +8,5 @@ export default function App({ Component, pageProps }) {
     initActivityRoom();
   }, []);
 
-  return <Component {...pageProps} />;
+  return <Component {...pageProps} className="h-screen w-screen" />;
 }
