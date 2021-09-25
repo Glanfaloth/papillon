@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../components/Button";
+import MultipleChoice from "../components/MultipleChoice";
 import { ProgressBar } from "../components/ProgressBar";
 
 export default function Choice() {
   const words = ["Sprechen", "Apfel", "Honig", "Tomate"];
+  const [selected, setSelected] = useState<null | string>(null);
 
   return (
     <div className="bg-gradient-to-r from-purple-400 to-red-500  overflow-hidden ">
@@ -15,11 +17,16 @@ export default function Choice() {
         <h1 className="pb-4">
           Es ist deine Mutter! Meine ist es jedoch nicht.
         </h1>
-        <div className="flex-row space-x-4">
-          {words.map((w) => (
-            <Button>{w}</Button>
-          ))}
-        </div>
+
+        <MultipleChoice
+          options={words}
+          onSelect={(o) => {
+            setSelected(o);
+          }}
+          selected={selected}
+          correctOption={words[0]}
+          showFeedback={false}
+        />
       </div>
     </div>
   );
