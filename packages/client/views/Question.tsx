@@ -5,6 +5,8 @@ import { ProgressBar } from "../components/ProgressBar";
 export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
+  const [isDanger, setIsDanger] = useState(false);
+  const [progressPercentage, setProgressPercentage] = useState(80);
 
   function applyHighlights(text: string ) {
     text = text
@@ -15,7 +17,7 @@ export default function Question() {
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
-      <ProgressBar progressPercentage={80} isDanger={false} />
+      <ProgressBar progressPercentage={progressPercentage} isDanger={isDanger} />
 
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
