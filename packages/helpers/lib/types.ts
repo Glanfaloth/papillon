@@ -17,10 +17,11 @@ export type ChooseWordMessage = {
   type: "choose-word";
   properties: {
     username: string;
-    descriptionAuthorUsername: string;
+    score: number;
+    authorUsername: string;
+    authorScore: number;
     word: string;
     description: string;
-    score: number;
   };
 };
 
@@ -35,6 +36,7 @@ export type WriteDescriptionData = {
 
 export type ChooseWordData = {
   word: string;
+  authorUsername: string;
   similarWords: string[];
   userDescription: string;
 };
