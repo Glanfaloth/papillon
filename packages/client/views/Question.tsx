@@ -24,9 +24,6 @@ export default function Question() {
     return text;
   }
 
-  // if (state.type !== "connected" || state.step.type !== "write-description")
-  //   return <div />;
-
   const progressPercentage =
     100 -
     Math.floor(
