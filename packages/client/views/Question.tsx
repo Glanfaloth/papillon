@@ -7,7 +7,7 @@ export default function Question() {
   const disabled = !answer;
   const [progressPercentage, setProgressPercentage] = useState(10);
 
-  function applyHighlights(text: string ) {
+  function applyHighlights(text: string) {
     text = text
       .replace(/\n$/g, "\n\n")
       .replace(/[A-Z].*?\b/g, "<mark>$&</mark>");
@@ -25,7 +25,7 @@ export default function Question() {
       <div className="container">
         <div className="backdrop" >
           <span
-          dangerouslySetInnerHTML={{ __html: applyHighlights(answer)}}
+            dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
             className="highlights"
           ></span>
         </div>
@@ -38,16 +38,33 @@ export default function Question() {
           }}
         ></textarea>
       </div>
-      <Button
-        className={progressPercentage < 20 && "animate-ping"}
-        variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
-        onClick={() => {
-          if (!disabled) {
-          }
-        }}
-      >
-        Submit
-      </Button>
+      <div>
+        {progressPercentage < 20 &&
+          <Button
+            className={progressPercentage < 20 && "animate-weakPing"}
+            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
+            onClick={() => {
+              if (!disabled) {
+              }
+            }
+            }
+          >
+            Submit
+          </Button>
+        }
+        <div className={progressPercentage < 20 && "absolute"}>
+          <Button
+            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
+            onClick={() => {
+              if (!disabled) {
+              }
+            }
+            }
+          >
+            Submit
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

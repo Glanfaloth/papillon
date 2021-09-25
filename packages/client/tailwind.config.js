@@ -28,13 +28,20 @@ module.exports = {
           },
           '100%': {
             transform: 'rotate(360deg)',
+          },
+        },
+        weakPing: {
+          '75%, 100%': {
+            transform: 'scale(1.5)',
+            opacity: '0',
           }
         }
       },
       animation: {
-        rotate0: 'rotate0 3s infinite',
-        rotate1: 'rotate1 3s infinite',
-        rotate2: 'rotate2 3s infinite',
+        rotate0: 'rotate0 2.5s infinite',
+        rotate1: 'rotate1 2.5s infinite',
+        rotate2: 'rotate2 2.5s infinite',
+        weakPing: 'weakPing 1s cubic-bezier(0, 0, 0.2, 1) infinite'
       }
     },
   },
