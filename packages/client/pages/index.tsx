@@ -6,7 +6,7 @@ import Question from "../components/Question";
 export default function Home() {
   return (
     <div>
-      <Waiting />
+      <Lobby />
       <Question />
       <Homepage />
     </div>

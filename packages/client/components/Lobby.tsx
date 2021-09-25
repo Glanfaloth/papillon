@@ -3,7 +3,7 @@ import * as Colyseus from "colyseus.js";
 
 const client = new Colyseus.Client("ws://localhost:2567");
 
-export default function Waiting() {
+export default function Lobby() {
   useEffect(() => {
     client
       .joinOrCreate("main_room")
