@@ -14,7 +14,7 @@ export default function Homepage() {
           <GiButterfly className="float-left" />
         </span>
       </span>
-      <p>What is your name:</p>
+      <p>What is your name?</p>
       <input type="text"></input>
       <Button onClick={() => {}}>Enter the Lobby</Button>
     </div>
