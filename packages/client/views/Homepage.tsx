@@ -10,18 +10,17 @@ export default function Homepage() {
   const disabled = !username;
 
   return (
-    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 overflow-hidden">
-      <div className="space-y-10">
+    <div className="shadow-xl bg-white p-8 rounded-xl w-4/5	">
         <span className="inline-grid grid-cols-3 gap-x-4 items-center">
           <span>
-            <GiButterfly className="float-right text-white" />
+            <GiButterfly className="float-right " />
           </span>
-          <h1 className="text-white">Welcome to Papillon</h1>
+          <h1>Welcome to Papillon</h1>
           <span>
-            <GiButterfly className="float-left text-white" />
+            <GiButterfly className="float-left " />
           </span>
         </span>
-        <p className="text-white">What is your name?</p>
+        <p>What is your name?</p>
         <input
           type="text"
           value={username}
@@ -37,6 +36,5 @@ export default function Homepage() {
           Enter the Lobby
         </Button>
       </div>
-    </div>
   );
 }
