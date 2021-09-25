@@ -23,7 +23,7 @@ export default function Lobby() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-purple-400 via-red-500 to-white-500 page-view overflow-hidden">
+    <div className="bg-gradient-to-r from-purple-400 via-red-500 to-white-500 overflow-hidden">
       <h1>Waiting for other players...</h1>
       <VscLoading />
     </div>
