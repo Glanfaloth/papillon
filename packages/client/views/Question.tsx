@@ -4,14 +4,15 @@ import { ProgressBar } from "../components/ProgressBar";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
-  const [value, setValue] = useState("X Y Z and then XYZ");
   const disabled = !answer;
   const [progressPercentage, setProgressPercentage] = useState(10);
+  const wordList = ["hello", "world"];
+  var regexFromWordList = new RegExp(wordList.join("|"), 'gi');
 
   function applyHighlights(text: string) {
     text = text
       .replace(/\n$/g, "\n\n")
-      .replace(/[A-Z].*?\b/g, "<mark>$&</mark>");
+      .replace(regexFromWordList, "<mark>$&</mark>");
     return text;
   }
 
