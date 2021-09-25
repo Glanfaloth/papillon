@@ -45,7 +45,7 @@ export default function Question() {
           }}
         ></textarea>
       </div>
-      <h2 className="text-red-600">2 words too similar. -2/10 penalty.</h2>
+      {wordCount > 0 && <h2 className="text-red-600">{wordCount} words too similar, you'll be penalized.</h2>}
       <Button
         className={progressPercentage < 33 && "animate-ping"}
         variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
@@ -56,7 +56,6 @@ export default function Question() {
       >
         Submit
       </Button>
-      <p>{wordCount}</p>
     </div>
   );
 }
