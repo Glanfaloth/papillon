@@ -11,7 +11,7 @@ export default function Homepage() {
   const userSubmittedName = !!state?.username;
 
   return (
-    <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
+    <div className="shadow-xl bg-white p-8 rounded-xl w-full h-full	">
       {/* Use this to render username form vs spinner */}
       {userSubmittedName ? "waiting" : "fill in form..."}
       <div className="space-y-10">

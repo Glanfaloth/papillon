@@ -26,10 +26,6 @@ export default function Home() {
       {step?.type === "write-description" && <Question />}
       {step?.type === "choose-word" && <Choice />}
       {step?.type === "end-screen" && <Scores />}
-      {/* <Lobby />
-      <Question />
-      <Choice />
-      <Scores /> */}
     </div>
   );
 }

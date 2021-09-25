@@ -53,27 +53,25 @@ export default function Question() {
         </h2>
       )}
       <div>
-        {progressPercentage < 20 &&
+        {progressPercentage < 20 && (
           <Button
             className={progressPercentage < 20 && "animate-weakPing"}
             variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
             onClick={() => {
               if (!disabled) {
               }
-            }
-            }
+            }}
           >
             Submit
           </Button>
-        }
+        )}
         <div className={progressPercentage < 20 && "absolute"}>
           <Button
             variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
             onClick={() => {
               if (!disabled) {
               }
-            }
-            }
+            }}
           >
             Submit
           </Button>
