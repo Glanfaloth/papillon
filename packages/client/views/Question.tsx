@@ -6,6 +6,7 @@ export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
   const [progressPercentage, setProgressPercentage] = useState(10);
+  const [wordCount, setWordCount] = useState(0);
   const wordList = ["hello", "world"];
   var regexFromWordList = new RegExp(wordList.join("|"), "gi");
 
@@ -40,6 +41,7 @@ export default function Question() {
           value={answer}
           onChange={(e) => {
             setAnswer(e.target.value);
+            answer.match(/(\w+)/g) != null && setWordCount(answer.match(/(\w+)/g).length);
           }}
         ></textarea>
       </div>
@@ -54,6 +56,7 @@ export default function Question() {
       >
         Submit
       </Button>
+      <p>{wordCount}</p>
     </div>
   );
 }
