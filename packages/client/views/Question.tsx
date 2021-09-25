@@ -31,7 +31,7 @@ export default function Question() {
         <div className="backdrop">
           <span
             dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
-            className="highlights"
+            className="highlights mt-0 mb-auto ml-0 mr-auto"
           ></span>
         </div>
         <textarea
