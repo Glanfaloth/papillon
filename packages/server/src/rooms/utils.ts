@@ -1,10 +1,9 @@
-import { StateForUser, GlobalState } from "@papillon/helpers/lib/types";
+import { GlobalState } from "@papillon/helpers/lib/types";
 import jwt from "jsonwebtoken";
-import _ from 'lodash';
+import _ from "lodash";
 
 export const getGlobalState = (rawState: string): GlobalState => {
   const decoded = jwt.decode(rawState);
-  console.log({ decoded })
 
   if (typeof decoded === "string" || !decoded)
     throw new Error("could not decode");
@@ -13,4 +12,4 @@ export const getGlobalState = (rawState: string): GlobalState => {
 };
 
 export const getRawState = (state: GlobalState): string =>
-  jwt.sign(_.pick(state, ['byUser', 'step']), "test");
+  jwt.sign(_.pick(state, ["byUser", "step"]), "test");

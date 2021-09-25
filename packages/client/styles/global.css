@@ -36,10 +36,12 @@ img {
   height: 100%;
 }
 
+
+/* 
 .page-view {
   width: 100vw;
   height: 100vh;
-}
+} */
 
 /* ./src/index.css */
 /* clear deafult stylings for browser consistencies */
@@ -79,6 +81,14 @@ img {
   }
   div {
     @apply flex justify-center items-center flex-wrap flex-col;
+  }
+
+  .tooltip {
+    @apply invisible absolute;
+  }
+
+  .has-tooltip:hover .tooltip {
+    @apply visible z-50;
   }
 }
 

@@ -27,7 +27,13 @@ export default function Question() {
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
       </h3>
-      <h1>Sprechen</h1>
+      <i className="text-gray-500">Hover to see its definition in English!</i>
+      <div className="has-tooltip">
+        <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
+          speak, say, talk
+        </span>
+        Sprechen
+      </div>
       <div className="container">
         <div className="backdrop">
           <span
@@ -53,27 +59,25 @@ export default function Question() {
         </h2>
       )}
       <div>
-        {progressPercentage < 20 &&
+        {progressPercentage < 20 && (
           <Button
             className={progressPercentage < 20 && "animate-weakPing"}
             variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
             onClick={() => {
               if (!disabled) {
               }
-            }
-            }
+            }}
           >
             Submit
           </Button>
-        }
+        )}
         <div className={progressPercentage < 20 && "absolute"}>
           <Button
             variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
             onClick={() => {
               if (!disabled) {
               }
-            }
-            }
+            }}
           >
             Submit
           </Button>

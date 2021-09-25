@@ -7,7 +7,7 @@
 }
 
 body {
-  margin: 30px;
+  /* margin: 30px; */
   background-color: #f0f0f0;
 }
 
@@ -68,7 +68,7 @@ mark {
   background-color: rgb(250, 183, 183);
 }
 
-textarea:focus{
+textarea:focus {
   outline: none;
   box-shadow: 0 0 0 2px #c6aada;
 }
