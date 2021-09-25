@@ -14,6 +14,8 @@
     "colyseus.js": "^0.14.13",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "next": "^11.0.0",
     "postcss": "^8.3.8",
     "react": "17.0.2",
@@ -26,6 +28,7 @@
     "ws": "^8.2.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5",
     "@types/node": "^16.10.1",
     "@types/react": "^17.0.24",
     "typescript": "^4.4.3"

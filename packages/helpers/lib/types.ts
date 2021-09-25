@@ -7,7 +7,7 @@ export type ClientToServerMessageUnion = {
   properties: {};
 };
 
-export type ServerToClientMessageUnion =
+export type Step =
   | { type: "waiting"; properties: undefined }
   | {
       type: "question";
@@ -17,3 +17,21 @@ export type ServerToClientMessageUnion =
       };
     }
   | { type: "question-time-elapsed" };
+
+export type UserState = {};
+
+export type GlobalState = {
+  byUser: {
+    [username: string]: UserState;
+  };
+  step: Step;
+};
+
+export type StateForUser = {
+  userState?: UserState;
+  step: Step;
+};
+
+export interface RawState {
+  state: string
+}

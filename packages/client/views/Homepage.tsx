@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../components/Button";
 import { GiButterfly } from "react-icons/gi";
+import { useColyseus } from "../colyseus/use-room";
 
 export default function Homepage() {
+  const [username, setUsername] = useState("");
+  const { connectToClient } = useColyseus();
+
+  const disabled = !username;
+
   return (
     <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 overflow-hidden">
       <div className="space-y-10">
@@ -18,6 +24,21 @@ export default function Homepage() {
         <h3 className="text-white pb-0">What is your name?</h3>
         <input type="text"></input>
         <Button onClick={() => {}}>Enter the Lobby</Button>
+        <p className="text-white">What is your name?</p>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Button
+          onClick={() => {
+            if (!disabled) {
+              connectToClient({ username });
+            }
+          }}
+        >
+          Enter the Lobby
+        </Button>
       </div>
     </div>
   );
