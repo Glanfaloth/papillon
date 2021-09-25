@@ -25,7 +25,9 @@ export default function Lobby() {
   return (
     <div>
       <h1>Waiting for other players...</h1>
-      <VscLoading />
+      <div className="fill-current bg-red-600  animate-spin h-5 w-5 mr-3">
+        <svg className="" viewBox="0 0 24 24"></svg>
+      </div>
     </div>
   );
 }
