@@ -8,8 +8,8 @@ const client = new Colyseus.Client("ws://localhost:2567");
 export default function Lobby() {
   useEffect(() => {
     const options: JoinOptions = {
-      username: 'elyes yes'
-    }
+      username: "elyes yes",
+    };
 
     client
       .joinOrCreate("main_room", options)

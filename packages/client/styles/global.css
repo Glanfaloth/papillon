@@ -26,6 +26,16 @@ img {
   display: block;
 }
 
+.question {
+  width: 500px;
+  height: 500px;
+}
+
+.question-container {
+  width: 100%;
+  height: 100%;
+}
+
 /* ./src/index.css */
 /* clear deafult stylings for browser consistencies */
 @tailwind base;
