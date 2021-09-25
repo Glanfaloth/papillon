@@ -41,7 +41,9 @@ export default function Question() {
           value={answer}
           onChange={(e) => {
             setAnswer(e.target.value);
-            answer.match(regexFromWordList) != null && setWordCount(answer.match(regexFromWordList).length);
+            answer.match(regexFromWordList) != null
+              ? setWordCount(answer.match(regexFromWordList).length)
+              : setWordCount(0);
           }}
         ></textarea>
       </div>
