@@ -7,7 +7,7 @@ import Scores from "../views/Scores";
 
 export default function Home() {
   return (
-    <div>
+    <div className="space-y-10">
       <Homepage />
       <Lobby />
       <Question />

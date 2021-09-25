@@ -8,8 +8,7 @@ export default function Choice() {
   const [selected, setSelected] = useState<null | string>(null);
 
   return (
-    <div className="bg-gradient-to-r from-purple-400 to-red-500  overflow-hidden ">
-      <div className="shadow-xl bg-white p-8 rounded-xl">
+      <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
         <ProgressBar progressPercentage={80} isDanger={false} />
         <h3 className="pt-8 text-gray-600">
           Which word is does the following describe?
@@ -27,7 +26,6 @@ export default function Choice() {
           correctOption={words[0]}
           showFeedback={false}
         />
-      </div>
     </div>
   );
 }
