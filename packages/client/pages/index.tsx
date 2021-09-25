@@ -3,7 +3,7 @@ import Homepage from "../views/Homepage";
 import Lobby from "../views/Lobby";
 import Question from "../views/Question";
 import Choice from "../views/Choice";
-import Score from "../views/Scores";
+import Scores from "../views/Scores";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Lobby />
       <Question />
       <Choice />
-      <Score />
+      <Scores />
     </div>
   );
 }
