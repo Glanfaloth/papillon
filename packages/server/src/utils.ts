@@ -1,4 +1,4 @@
-import { StateForUser, GlobalState } from "@papillon/helpers/lib/types";
+import { GlobalState, GlobalStateClient } from "@papillon/helpers/lib/types";
 import jwt from "jsonwebtoken";
 
 export const getGlobalState = (rawState: string): GlobalState => {
@@ -12,12 +12,13 @@ export const getGlobalState = (rawState: string): GlobalState => {
 export const getUserStateFromRawState = (
   rawState: string,
   username: string
-): StateForUser => {
+): GlobalStateClient => {
   const globalState = getGlobalState(rawState);
 
   return {
+    username,
     step: globalState.step,
-    userState: globalState.byUser[username],
+    byUser: globalState.byUser,
   };
 };
 
