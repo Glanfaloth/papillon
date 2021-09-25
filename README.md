@@ -7,4 +7,4 @@
 `$ lerna bootstrap`
 
 ## Run
-`$ lerna run start --stream`
+`$ lerna run dev --stream`
