@@ -39,7 +39,7 @@ export default function Scores() {
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-4/5	">
       <h1>Scores</h1>
-      <BarChart width={300} height={100} data={sortedData}>
+      <BarChart width={600} height={200} data={sortedData}>
         <Bar dataKey="points">
           {data.map((entry, index) => (
             <Cell fill={bar_color[index % 4]} key={`cell-${index}`} />

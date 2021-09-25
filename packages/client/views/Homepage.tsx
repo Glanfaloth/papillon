@@ -11,7 +11,8 @@ export default function Homepage() {
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-4/5	">
-        <span className="inline-grid grid-cols-3 gap-x-4 items-center">
+      <div className="space-y-10">
+        <span className="inline-grid grid-cols-3 gap-x-2 items-center">
           <span>
             <GiButterfly className="float-right " />
           </span>
@@ -20,7 +21,7 @@ export default function Homepage() {
             <GiButterfly className="float-left " />
           </span>
         </span>
-        <p>What is your name?</p>
+        <h3 className="text-white pb-0">What is your name?</h3>
         <input
           type="text"
           value={username}
@@ -36,5 +37,6 @@ export default function Homepage() {
           Enter the Lobby
         </Button>
       </div>
+    </div>
   );
 }
