@@ -47,6 +47,11 @@ export default function Question() {
           }}
         ></textarea>
       </div>
+      {wordCount > 0 && (
+        <h2 className="text-red-600">
+          {wordCount} words too similar, you'll be penalized.
+        </h2>
+      )}
       <div>
         {progressPercentage < 20 &&
           <Button
