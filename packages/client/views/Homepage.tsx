@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Button, ButtonVariant } from "../components/Button";
 import { GiButterfly } from "react-icons/gi";
 import { ColyseusContext, MyContext, useConnectColyseus } from "../colyseus/use-room";
-import { GlobalState, GlobalStateClient } from "@papillon/helpers/lib/types";
 
 export default function Homepage({
   myContext: { context, setContext },

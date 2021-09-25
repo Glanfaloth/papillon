@@ -1,14 +1,17 @@
-import React, { useRef, useState } from "react";
+import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
+import React, { useContext, useRef, useState } from "react";
+import { ColyseusContext } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
-  const [progressPercentage, setProgressPercentage] = useState(10);
   const [wordCount, setWordCount] = useState(0);
   const wordList = ["hello", "world"];
   var regexFromWordList = new RegExp(wordList.join("|"), "gi");
+
+  const state = useContext(ColyseusContext);
 
   function applyHighlights(text: string) {
     text = text
@@ -16,6 +19,16 @@ export default function Question() {
       .replace(regexFromWordList, "<mark>$&</mark>");
     return text;
   }
+
+  if (state.type !== "connected" || state.step.type !== "write-description")
+    return <div />;
+
+  const progressPercentage =
+    100 -
+    Math.floor(
+      (100 * (QUESTION_DURATION_SECONDS - state.step.remainingTime)) /
+        QUESTION_DURATION_SECONDS
+    );
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">

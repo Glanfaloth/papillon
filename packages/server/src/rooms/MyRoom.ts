@@ -7,6 +7,7 @@ import {
   UserState,
 } from "@papillon/helpers/lib/types";
 import { writeDescriptionQuestions } from "../data";
+import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
 
 const NUMBER_USERS = 1;
 
@@ -85,7 +86,7 @@ export class MyRoom extends Room<MyRoomState> {
       if (Object.keys(newGlobalState.byUser).length >= NUMBER_USERS) {
         newGlobalState.step = {
           type: "write-description",
-          remainingTime: 15,
+          remainingTime: QUESTION_DURATION_SECONDS,
           properties: {
             userToQuestionData: Object.fromEntries(
               Object.keys(newGlobalState.byUser).map((userId, index) => [
@@ -117,7 +118,7 @@ export class MyRoom extends Room<MyRoomState> {
 
           newGlobalState2.step = {
             type: "choose-word",
-            remainingTime: 15,
+            remainingTime: QUESTION_DURATION_SECONDS,
             properties: {
               userToWordAndDescription: Object.fromEntries(
                 Object.keys(newGlobalState2.byUser).map((userId) => {
