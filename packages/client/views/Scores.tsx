@@ -16,18 +16,22 @@ import { GiWhiteBook } from "react-icons/gi";
 const data = [
   {
     name: "Tomato",
+    id: "Tomato",
     points: 10,
   },
   {
     name: "Pesca",
+    id: "Pesca",
     points: 22,
   },
   {
     name: "Kiwi",
+    id: "Kiwi",
     points: 12,
   },
   {
     name: "Fruit",
+    id: "Fruit",
     points: 3,
   },
 ];
@@ -35,7 +39,7 @@ const data = [
 const bar_color = ["#cb4335", "#28b463", "#3498db", "#f1c40f"];
 
 export default function Scores() {
-  const sortedData = _.sortBy(data, (o: typeof data[0]) => -1 * o.points);
+  const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
       <h1>Scores</h1>
