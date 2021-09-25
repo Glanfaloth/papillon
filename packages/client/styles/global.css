@@ -36,6 +36,11 @@ img {
   height: 100%;
 }
 
+.page-view {
+  width: 100vw;
+  height: 100vh;
+}
+
 /* ./src/index.css */
 /* clear deafult stylings for browser consistencies */
 @tailwind base;

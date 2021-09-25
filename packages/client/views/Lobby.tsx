@@ -23,7 +23,7 @@ export default function Lobby() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-gradient-to-r from-purple-400 via-red-500 to-white-500 page-view overflow-hidden">
       <h1>Waiting for other players...</h1>
       <div className="fill-current bg-red-600  animate-spin h-5 w-5 mr-3">
         <svg className="" viewBox="0 0 24 24"></svg>
