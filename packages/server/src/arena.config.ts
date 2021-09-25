@@ -10,11 +10,7 @@ export default Arena({
     getId: () => "Your Colyseus App",
 
     initializeGameServer: (gameServer) => {
-        /**
-         * Define your room handlers:
-         */
-        gameServer.define('my_room', MyRoom);
-
+        gameServer.define('main_room', MyRoom);
     },
 
     initializeExpress: (app) => {
