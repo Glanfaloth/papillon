@@ -5,8 +5,7 @@ import { ProgressBar } from "../components/ProgressBar";
 export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
-  const [isDanger, setIsDanger] = useState(false);
-  const [progressPercentage, setProgressPercentage] = useState(80);
+  const [progressPercentage, setProgressPercentage] = useState(10);
 
   function applyHighlights(text: string ) {
     text = text
@@ -17,7 +16,7 @@ export default function Question() {
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
-      <ProgressBar progressPercentage={progressPercentage} isDanger={isDanger} />
+      <ProgressBar progressPercentage={progressPercentage} isDanger={progressPercentage < 20} />
 
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
@@ -40,6 +39,7 @@ export default function Question() {
         ></textarea>
       </div>
       <Button
+        className={progressPercentage < 20 && "animate-ping"}
         variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
         onClick={() => {
           if (!disabled) {
