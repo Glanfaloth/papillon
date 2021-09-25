@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "../components/Button";
+import { Button, ButtonVariant } from "../components/Button";
 import { GiButterfly } from "react-icons/gi";
 import { useColyseus } from "../colyseus/use-room";
 
@@ -28,6 +28,7 @@ export default function Homepage() {
           onChange={(e) => setUsername(e.target.value)}
         />
         <Button
+          variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
           onClick={() => {
             if (!disabled) {
               connectToClient({ username });
