@@ -34,30 +34,35 @@ export const OptionBlock = ({
           text-blue text-center text-white text-sm md:text-base lg:text-lg font-semibold
           rounded-lg 
           ${!isSelected ? optionStyle : "bg-blue-800"}
-          ${
-            disabled || isSelected
-              ? "cursor-default"
-              : `hover:border-4 transition delay-10 duration-100 ease-in-out transform
+          ${disabled || isSelected
+          ? "cursor-default"
+          : `hover:border-4 transition delay-10 duration-100 ease-in-out transform
               hover:scale-105 hover:shadow-xl shadow-lg
               `
-          }
+        }
           ${isSelected ? "text-gray-200" : ""}
           flex-1
           ${className || ""}
           `}
       onClick={
         disabled || isSelected
-          ? () => {}
+          ? () => { }
           : () => {
-              onClick && onClick();
-            }
+            onClick && onClick();
+          }
       }
       disabled={disabled || isSelected}
     >
       {showNumberBadge && (
-        <span className="w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white  hidden md:block bg-blue-500 ">
-          {index + 1}
+        <span className="w-4 h-4">
+          <span className="animate-ping w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white  hidden md:block bg-blue-500 ">
+            {index + 1}
+          </span>
+          <span className="w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white hidden md:block bg-blue-500">
+            {index + 1}
+          </span>
         </span>
+
       )}
       {text}
     </button>
