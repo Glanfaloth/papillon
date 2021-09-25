@@ -8,7 +8,7 @@ export default function Choice() {
   const [selected, setSelected] = useState<null | string>(null);
 
   return (
-      <div className="shadow-xl bg-white p-8 rounded-xl w-4/5	">
+      <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
         <ProgressBar progressPercentage={80} isDanger={false} />
         <h3 className="pt-8 text-gray-600">
           Which word is does the following describe?

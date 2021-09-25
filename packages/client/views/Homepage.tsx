@@ -10,9 +10,9 @@ export default function Homepage() {
   const disabled = !username;
 
   return (
-    <div className="shadow-xl bg-white p-8 rounded-xl w-4/5	">
+    <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
       <div className="space-y-10">
-        <span className="inline-grid grid-cols-3 gap-x-2 items-center">
+        <div className="inline-grid grid-cols-3 gap-x-2 items-center">
           <span>
             <GiButterfly className="float-right " />
           </span>
@@ -20,8 +20,8 @@ export default function Homepage() {
           <span>
             <GiButterfly className="float-left " />
           </span>
-        </span>
-        <h3 className="text-white pb-0">What is your name?</h3>
+        </div>
+        <h3>What is your name?</h3>
         <input
           type="text"
           value={username}
