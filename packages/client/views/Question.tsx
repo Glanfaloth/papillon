@@ -7,7 +7,7 @@ export default function Question() {
   const disabled = !answer;
   const [progressPercentage, setProgressPercentage] = useState(10);
   const wordList = ["hello", "world"];
-  var regexFromWordList = new RegExp(wordList.join("|"), 'gi');
+  var regexFromWordList = new RegExp(wordList.join("|"), "gi");
 
   function applyHighlights(text: string) {
     text = text
@@ -43,8 +43,9 @@ export default function Question() {
           }}
         ></textarea>
       </div>
+      <h2 className="text-red-600">2 words too similar. -2/10 penalty.</h2>
       <Button
-        className={progressPercentage < 20 && "animate-ping"}
+        className={progressPercentage < 33 && "animate-ping"}
         variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
         onClick={() => {
           if (!disabled) {
