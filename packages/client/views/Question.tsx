@@ -3,6 +3,7 @@ import React, { useContext, useRef, useState } from "react";
 import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
@@ -47,7 +48,12 @@ export default function Question() {
         <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
           speak, say, talk
         </span>
-        <h1>Sprechen</h1>
+        <div className="flex flex-row content-center">
+          <h2 className="mr-2">Sprechen</h2>
+          <h2>
+            <AiOutlineQuestionCircle className="text-blue-500" />
+          </h2>
+        </div>
       </div>
       <div className="container ">
         <div className="backdrop">
