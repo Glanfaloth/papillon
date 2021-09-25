@@ -22,9 +22,6 @@ export default function Homepage() {
           </span>
         </span>
         <h3 className="text-white pb-0">What is your name?</h3>
-        <input type="text"></input>
-        <Button onClick={() => {}}>Enter the Lobby</Button>
-        <p className="text-white">What is your name?</p>
         <input
           type="text"
           value={username}
