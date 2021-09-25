@@ -15,8 +15,6 @@ export const getUserStateFromRawState = (
 ): StateForUser => {
   const globalState = getGlobalState(rawState);
 
-  console.log({ globalState })
-
   return {
     step: globalState.step,
     userState: globalState.byUser[username],

@@ -12,7 +12,7 @@ export const useColyseus = () => {
   const [isConnected, setIsConnected] = useState(!!activityRoom?.room);
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const [state, setState] = useState<StateForUser>();
+  const [state, setState] = useState<StateForUser & { username: string }>();
 
   const connectToClient = async (options: JoinOptions) => {
     try {
@@ -29,8 +29,7 @@ export const useColyseus = () => {
     []
   );
 
-  const stateUpdate = (newState: StateForUser) => {
-    
+  const stateUpdate = (newState: StateForUser & { username: string }) => {
     if (!_.isEqual(newState, state)) {
       setState(newState);
     }

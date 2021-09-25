@@ -2,6 +2,7 @@ import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
 import { GlobalState, JoinOptions } from "@papillon/helpers/lib/types";
 
+const NUMBER_USERS = 3;
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
     this.setState(
@@ -21,15 +22,21 @@ export class MyRoom extends Room<MyRoomState> {
   onJoin(client: Client, options: JoinOptions): void {
     const state = this.state.getState();
 
-    console.log({ state })
-
     if (state) {
-      this.setState(
-        new MyRoomState({
-          step: state.step,
-          byUser: { ...state.byUser, [options.username]: {} },
-        })
-      );
+      const newGlobalState = {
+        step: state.step,
+        byUser: { ...state.byUser, [options.username]: {} },
+      };
+
+      if (Object.keys(newGlobalState.byUser).length >= NUMBER_USERS) {
+        newGlobalState.step = {
+          type: "question",
+          // TODO(michael)
+          properties: { questionData: {} },
+        };
+      }
+
+      this.setState(new MyRoomState(newGlobalState));
     } else {
       this.onCreate(options);
     }
@@ -37,6 +44,7 @@ export class MyRoom extends Room<MyRoomState> {
 
   onLeave(client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
+    const state = this.state.getState();
   }
 
   onDispose() {

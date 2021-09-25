@@ -5,12 +5,15 @@ import { useColyseus } from "../colyseus/use-room";
 
 export default function Homepage() {
   const [username, setUsername] = useState("");
-  const { connectToClient } = useColyseus();
+  const { connectToClient, state } = useColyseus();
 
   const disabled = !username;
+  const userSubmittedName = !!state?.userState
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
+      {/* Use this to render username form vs spinner */}
+      {userSubmittedName ? 'waiting' : 'fill in form...'}
       <div className="space-y-10">
         <div className="inline-grid grid-cols-3 gap-x-2 items-center">
           <span>
