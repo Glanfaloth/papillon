@@ -1,27 +1,75 @@
 import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
 import {
-  GlobalState,
+  ChooseWordMessage,
   JoinOptions,
+  SubmitDescriptionMessage,
   UserState,
 } from "@papillon/helpers/lib/types";
 import { writeDescriptionQuestions } from "../data";
 
-const NUMBER_USERS = 3;
+const NUMBER_USERS = 2;
+
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
     this.setState(
       new MyRoomState({
-        byUser: { [options.username]: { score: undefined, seenWords: [] } },
+        byUser: { [options.username]: { score: 0, seenWords: [] } },
         step: { type: "waiting", properties: undefined },
       })
     );
 
-    // this.onMessage("submit-description", (client, message) => {
-    //   //
-    //   // handle "type" message
-    //   //
-    // });
+    this.onMessage(
+      "submit-description",
+      (client, message: SubmitDescriptionMessage["properties"]) => {
+        const state = this.state.getState();
+        const userState = state.byUser[message.username] ?? {
+          score: 0,
+          seenWords: [],
+        };
+
+        userState.score = message.score + userState.score;
+        userState.seenWords.push({
+          word: message.word,
+          description: message.description,
+          isAuthor: true
+        });
+
+        this.setState(
+          new MyRoomState({
+            step: state.step,
+            byUser: { ...state.byUser, [message.username]: userState },
+          })
+        );
+      }
+    );
+
+
+
+    this.onMessage(
+      "submit-description",
+      (client, message: ChooseWordMessage["properties"]) => {
+        const state = this.state.getState();
+        const userState = state.byUser[message.username] ?? {
+          score: 0,
+          seenWords: [],
+        };
+
+        userState.score = message.score + userState.score;
+        userState.seenWords.push({
+          word: message.word,
+          description: message.description,
+          isAuthor: false
+        });
+
+        this.setState(
+          new MyRoomState({
+            step: state.step,
+            byUser: { ...state.byUser, [message.username]: userState },
+          })
+        );
+      }
+    );
   }
 
   onJoin(client: Client, options: JoinOptions): void {
@@ -61,7 +109,7 @@ export class MyRoom extends Room<MyRoomState> {
             );
           }
 
-          this.setState(new MyRoomState(newGlobalState));
+          this.setState(new MyRoomState(state));
         }, 100);
 
         this.clock.setTimeout(() => {
@@ -90,6 +138,17 @@ export class MyRoom extends Room<MyRoomState> {
                       }))
                     )
                     .find(({ word }) => !mySeenWords.includes(word));
+
+                  console.log(
+                    Object.entries(newGlobalState2.byUser).flatMap(
+                      ([otherUserId, { seenWords: otherSeenWords }]) =>
+                        otherSeenWords.map(({ word, description }) => ({
+                          otherUserId,
+                          word,
+                          description,
+                        }))
+                    )
+                  );
 
                   const nextQuestionData = writeDescriptionQuestions.find(
                     (question) => question.word === nextQuestion.word

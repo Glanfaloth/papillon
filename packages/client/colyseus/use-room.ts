@@ -11,7 +11,7 @@ export const useColyseus = () => {
   const [isConnected, setIsConnected] = useState(!!activityRoom?.room);
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const [state, setState] = useState<GlobalStateClient>();
+  const [state, setState] = useState<GlobalStateClient | undefined>();
 
   const connectToClient = async (options: JoinOptions) => {
     try {
