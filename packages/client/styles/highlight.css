@@ -65,11 +65,10 @@ textarea {
 mark {
   border-radius: 3px;
   color: black;
-  background-color: #b1d5e5;
+  background-color: rgb(250, 183, 183);
 }
 
-textarea:focus,
-button:focus {
+textarea:focus{
   outline: none;
   box-shadow: 0 0 0 2px #c6aada;
 }
