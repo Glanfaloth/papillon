@@ -1,6 +1,6 @@
 import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
-import { JoinOptions } from '@papillon/helpers/lib/types/message';
+import { JoinOptions } from '@papillon/helpers/lib/types';
 
 export class MyRoom extends Room<MyRoomState> {
 

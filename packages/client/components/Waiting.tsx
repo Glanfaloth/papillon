@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import * as Colyseus from "colyseus.js";
 import { JoinOptions } from "@papillon/helpers/lib/types";
-import { VscLoading } from "react-icons/vsc";
 import { ROOM_NAME } from "@papillon/helpers/lib/const";
 
 const client = new Colyseus.Client("ws://localhost:2567");
 
-export default function Lobby() {
+export default function Waiting() {
   useEffect(() => {
     const options: JoinOptions = {
-      username: "elyes yes",
-    };
+      username: 'elyes yes',
+    }
 
     client
       .joinOrCreate(ROOM_NAME, options)
@@ -22,10 +21,5 @@ export default function Lobby() {
       });
   }, []);
 
-  return (
-    <div>
-      <h1>Waiting for other players...</h1>
-      <VscLoading />
-    </div>
-  );
+  return <h1>Waiting</h1>;
 }
