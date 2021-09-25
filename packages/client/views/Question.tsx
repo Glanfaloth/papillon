@@ -96,7 +96,9 @@ export default function Question() {
                   type: "submit-description",
                   properties: {
                     username: state.username ?? 0,
-                    word: "",
+                    word: state.step.properties.userToQuestionData[
+                      state.username
+                    ].word,
                     score: 0,
                     description: answer,
                   },

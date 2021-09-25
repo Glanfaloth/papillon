@@ -9,7 +9,7 @@ import {
 import { writeDescriptionQuestions } from "../data";
 import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
 
-const NUMBER_USERS = 1;
+const NUMBER_USERS = 2;
 
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
