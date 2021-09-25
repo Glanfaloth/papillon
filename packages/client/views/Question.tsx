@@ -1,6 +1,6 @@
 import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
 import React, { useContext, useRef, useState } from "react";
-import { ColyseusContext } from "../colyseus/use-room";
+import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
 
@@ -13,6 +13,8 @@ export default function Question() {
 
   const state = useContext(ColyseusContext);
 
+  const { sendMessage } = useColyseus();
+
   function applyHighlights(text: string) {
     text = text
       .replace(/\n$/g, "\n\n")
@@ -20,13 +22,13 @@ export default function Question() {
     return text;
   }
 
-  if (state.type !== "connected" || state.step.type !== "write-description")
-    return <div />;
+  // if (state.type !== "connected" || state.step.type !== "write-description")
+  //   return <div />;
 
   const progressPercentage =
     100 -
     Math.floor(
-      (100 * (QUESTION_DURATION_SECONDS - state.step.remainingTime)) /
+      (100 * (QUESTION_DURATION_SECONDS - (state.step?.remainingTime ?? 0))) /
         QUESTION_DURATION_SECONDS
     );
 
@@ -78,6 +80,10 @@ export default function Question() {
             variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
             onClick={() => {
               if (!disabled) {
+                sendMessage({
+                  type: "submit-description",
+                  properties: { username: (state.username ?? 0), word: '', score: 0, description: answer },
+                });
               }
             }}
           >
