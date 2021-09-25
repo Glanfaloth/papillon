@@ -3,7 +3,7 @@ import Homepage from "../components/Homepage";
 import Lobby from "../components/Lobby";
 import Question from "../components/Question";
 import Choice from "../components/Choice";
-import Score from "../components/Scores";
+import Scores from "../components/Scores";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Lobby />
       <Question />
       <Choice />
-      <Score />
+      <Scores />
     </div>
   );
 }
