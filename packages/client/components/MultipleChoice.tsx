@@ -33,7 +33,7 @@ export const OptionBlock = ({
       className={`flex-row py-2 px-4 mx-2 my-1 w-full
           text-blue text-center text-white text-sm md:text-base lg:text-lg font-semibold
           rounded-lg 
-          ${!isSelected ? optionStyle : "bg-gray-200"}
+          ${!isSelected ? optionStyle : "bg-blue-800"}
           ${
             disabled || isSelected
               ? "cursor-default"
