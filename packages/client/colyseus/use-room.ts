@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import {
   JoinOptions,
   ClientToServerMessageUnion,
-  StateForUser,
   RawState,
+  GlobalStateClient,
 } from "@papillon/helpers/lib/types";
 import _ from "lodash";
 import { activityRoom } from "./activity-room";
@@ -12,7 +12,7 @@ export const useColyseus = () => {
   const [isConnected, setIsConnected] = useState(!!activityRoom?.room);
   const [isConnecting, setIsConnecting] = useState(false);
 
-  const [state, setState] = useState<StateForUser & { username: string }>();
+  const [state, setState] = useState<GlobalStateClient>();
 
   const connectToClient = async (options: JoinOptions) => {
     try {
@@ -29,7 +29,7 @@ export const useColyseus = () => {
     []
   );
 
-  const stateUpdate = (newState: StateForUser & { username: string }) => {
+  const stateUpdate = (newState: GlobalStateClient) => {
     if (!_.isEqual(newState, state)) {
       setState(newState);
     }

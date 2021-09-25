@@ -7,23 +7,40 @@ export type ClientToServerMessageUnion = {
   properties: {};
 };
 
-export type QuestionData = {
+export type WriteDescriptionData = {
   word: string;
-  similarWords: [];
+  similarWords: string[];
+};
+
+export type ChooseWordData = {
+  word: string;
+  similarWords: string[];
+  userDescription: string;
 };
 
 export type Step =
   | { type: "waiting"; properties: undefined }
   | {
-      type: "question";
+      type: "write-description";
+      remainingTime: number;
       properties: {
-        // TODO(michael)
-        questionData: {};
+        userToQuestionData: {
+          [userId: string]: WriteDescriptionData;
+        };
       };
     }
-  | { type: "question-time-elapsed" };
+  | {
+      type: "choose-word";
+      remainingTime: number;
+      properties: {
+        userToWordAndDescription: {
+          [userId: string]: ChooseWordData;
+        };
+      };
+    }
+  | { type: "end-screen"; properties: { resultByUser: { score: number } } };
 
-export type UserState = {};
+export type UserState = { score?: number, seenWords: [] };
 
 export type GlobalState = {
   byUser: {
@@ -32,13 +49,9 @@ export type GlobalState = {
   step: Step;
 };
 
-export type StateForUser = {
-  userState?: UserState;
-  step: Step;
-};
-
+export type GlobalStateClient = GlobalState & { username: string };
 export interface RawState {
   state: string;
 }
 
-export const questions: QuestionData[] = [];
+export const questions: WriteDescriptionData[] = [];

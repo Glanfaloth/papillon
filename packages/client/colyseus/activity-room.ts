@@ -2,18 +2,18 @@ import * as Colyseus from "colyseus.js";
 import {
   JoinOptions,
   ClientToServerMessageUnion,
-  StateForUser,
   RawState,
+  GlobalStateClient,
 } from "@papillon/helpers/lib/types";
 import { ROOM_NAME } from "@papillon/helpers/lib/const";
 import _ from "lodash";
-import { getUserStateFromRawState } from "./utils";
+import { getClientStateFromRawState } from "./utils";
 
 export class ActivityRoom {
   client: Colyseus.Client;
   room: Colyseus.Room<RawState>;
   sessionId: string;
-  previousStateForUser: StateForUser;
+  previousClientState: GlobalStateClient;
   username: string;
 
   constructor() {
@@ -48,12 +48,12 @@ export class ActivityRoom {
   };
 
   onStateChange = (
-    callback: (state: StateForUser & { username: string }) => void
+    callback: (state: GlobalStateClient) => void
   ) => {
     if (!this.room) throw new Error("No room found");
 
     this.room.onStateChange(({ state }) => {
-      const stateForUser = getUserStateFromRawState(state, this.username);
+      const stateForUser = getClientStateFromRawState(state, this.username);
 
       callback({ ...stateForUser, username: this.username });
     });
