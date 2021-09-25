@@ -58,7 +58,7 @@ const data = [
 
 export default function Scores() {
   return (
-    <div>
+    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 page-view overflow-hidden">
       <h1>Scores</h1>
       <BarChart width={150} height={40} data={data}>
         <Bar dataKey="uv" fill="#8884d8" />
