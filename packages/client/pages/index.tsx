@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Waiting from "../components/Waiting";
+import Waiting from "../components/WaitingLobby";
 import Homepage from "../components/Homepage";
 import Question from "../components/Question";
 
