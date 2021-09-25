@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Homepage from "../components/Homepage";
-import Lobby from "../components/Lobby";
-import Question from "../components/Question";
-import Choice from "../components/Choice";
-import Score from "../components/Scores";
+import Homepage from "../views/Homepage";
+import Lobby from "../views/Lobby";
+import Question from "../views/Question";
+import Choice from "../views/Choice";
+import Score from "../views/Scores";
 
 export default function Home() {
   return (
