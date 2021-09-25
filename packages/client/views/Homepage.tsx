@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, ButtonVariant } from "../components/Button";
 import { GiButterfly } from "react-icons/gi";
-import { useColyseus } from "../colyseus/use-room";
+import { ColyseusContext, MyContext, useConnectColyseus } from "../colyseus/use-room";
+import { GlobalState, GlobalStateClient } from "@papillon/helpers/lib/types";
 
-export default function Homepage() {
+export default function Homepage({
+  myContext: { context, setContext },
+}: {
+  myContext: MyContext;
+}) {
   const [username, setUsername] = useState("");
-  const { connectToClient, state } = useColyseus();
+  const state = useContext(ColyseusContext);
+  const { connectToClient } = useConnectColyseus(context, setContext);
 
   const disabled = !username;
-  const userSubmittedName = !!state?.username;
+  const userSubmittedName = state.type === 'connected';
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full h-full	">

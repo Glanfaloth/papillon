@@ -4,6 +4,7 @@ import {
   ClientToServerMessageUnion,
   RawState,
   GlobalStateClient,
+  GlobalStateClientFrontend,
 } from "@papillon/helpers/lib/types";
 import { ROOM_NAME } from "@papillon/helpers/lib/const";
 import _ from "lodash";
@@ -31,6 +32,7 @@ export class ActivityRoom {
       this.sessionId = room.sessionId;
       this.username = options.username;
     } catch (error) {
+      console.log(error)
       throw new Error(error);
     }
   };
@@ -47,15 +49,13 @@ export class ActivityRoom {
     this.room.removeAllListeners();
   };
 
-  onStateChange = (
-    callback: (state: GlobalStateClient) => void
-  ) => {
+  onStateChange = (callback: (state: GlobalStateClientFrontend) => void) => {
     if (!this.room) throw new Error("No room found");
 
     this.room.onStateChange(({ state }) => {
       const stateForUser = getClientStateFromRawState(state, this.username);
 
-      callback({ ...stateForUser, username: this.username });
+      callback({ ...stateForUser, username: this.username, type: "connected" });
     });
   };
 }

@@ -1,46 +1,68 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   JoinOptions,
   ClientToServerMessageUnion,
-  GlobalStateClient,
+  GlobalStateClientFrontend,
 } from "@papillon/helpers/lib/types";
 import _ from "lodash";
-import { activityRoom } from "./activity-room";
+import { activityRoom, initActivityRoom } from "./activity-room";
+import React from "react";
 
-export const useColyseus = () => {
-  const [isConnected, setIsConnected] = useState(!!activityRoom?.room);
-  const [isConnecting, setIsConnecting] = useState(false);
+export const ColyseusContext = React.createContext<GlobalStateClientFrontend>({
+  type: "loading",
+});
 
-  const [state, setState] = useState<GlobalStateClient | undefined>();
+export type MyContext = {
+  context: GlobalStateClientFrontend;
+  setContext: (_: GlobalStateClientFrontend) => void;
+};
+
+export const useSetupColyseus = (
+  state: GlobalStateClientFrontend,
+  setState: (_: GlobalStateClientFrontend) => void
+) => {
+  const isSetup = useRef(false);
+
+  useEffect(() => {
+    if (state.type !== "loading" || isSetup.current) return;
+
+    initActivityRoom();
+
+    setState({ type: "room-initialised" });
+
+    // return () => {
+    //   activityRoom?.removeAllListeners();
+    // }
+  }, [state]);
+};
+
+export const useConnectColyseus = (
+  state: GlobalStateClientFrontend,
+  setState: (_: GlobalStateClientFrontend) => void
+) => {
+  const [connectedToClient, setConnectedToClient] = useState(false);
 
   const connectToClient = async (options: JoinOptions) => {
-    try {
-      setIsConnecting(true);
-      await activityRoom?.connect(options);
-      setIsConnected(true);
-    } finally {
-      setIsConnecting(false);
-    }
+    if (!activityRoom || state.type !== "room-initialised") return;
+
+    await activityRoom.connect(options);
+
+    setConnectedToClient(true)
   };
 
+  useEffect(() => {
+    if (!activityRoom || state.type !== "room-initialised" || !connectedToClient) return;
+    activityRoom.onStateChange(setState);
+  }, [setState, state.type, connectedToClient]);
+
+  return { connectToClient };
+};
+
+export const useColyseus = () => {
   const sendMessage = useCallback(
     (message: ClientToServerMessageUnion) => activityRoom?.sendMessage(message),
     []
   );
 
-  const stateUpdate = (newState: GlobalStateClient) => {
-    if (!_.isEqual(newState, state)) {
-      setState(newState);
-    }
-  };
-
-  useEffect(() => {
-    if (!isConnected) return;
-
-    activityRoom?.onStateChange(stateUpdate);
-
-    return () => activityRoom?.removeAllListeners();
-  }, [stateUpdate, isConnected]);
-
-  return { connectToClient, sendMessage, state };
+  return { sendMessage };
 };

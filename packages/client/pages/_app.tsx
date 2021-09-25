@@ -1,14 +1,22 @@
-import { useEffect } from "react";
-import { initActivityRoom } from "../colyseus/activity-room";
+import { GlobalStateClientFrontend } from "@papillon/helpers/lib/types";
+import { useEffect, useState } from "react";
+import { ColyseusContext, useSetupColyseus } from "../colyseus/use-room";
 import "../styles/global.css";
 import "../styles/highlight.css";
 
 export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    initActivityRoom();
-  }, []);
+  const [context, setContext] = useState<GlobalStateClientFrontend>({
+    type: "loading",
+  });
+  useSetupColyseus(context, setContext);
 
   return (
-    <Component {...pageProps} className="h-screen w-screen overflow-hidden" />
+    <ColyseusContext.Provider value={context}>
+      <Component
+        {...pageProps}
+        className="h-screen w-screen overflow-hidden"
+        myContext={{ context, setContext }}
+      />
+    </ColyseusContext.Provider>
   );
 }

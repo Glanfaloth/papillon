@@ -1,31 +1,33 @@
-import Head from "next/head";
 import Homepage from "../views/Homepage";
 import Lobby from "../views/Lobby";
 import Question from "../views/Question";
 import Choice from "../views/Choice";
 import Scores from "../views/Scores";
-import { useColyseus } from "../colyseus/use-room";
-import { useEffect } from "react";
+import { ColyseusContext, MyContext } from "../colyseus/use-room";
+import { useContext, useEffect } from "react";
 
-export default function Home() {
-  const { state } = useColyseus();
+export default function Home({ myContext }: { myContext: MyContext }) {
+  const state = useContext(ColyseusContext);
 
   useEffect(() => {
-    console.log("state");
-    console.log("Step is", state?.step);
-
-    console.log(state);
+    console.log({ state });
   }, [state]);
-
-  const step = state?.step;
 
   return (
     <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-full flex-row p-20">
-      {step?.type === undefined && <Homepage />}
-      {step?.type === "waiting" && <Lobby />}
-      {step?.type === "write-description" && <Question />}
-      {step?.type === "choose-word" && <Choice />}
-      {step?.type === "end-screen" && <Scores />}
+      {state.type !== "connected" ? (
+        <Homepage myContext={myContext} />
+      ) : state.step.type === "waiting" ? (
+        <Lobby />
+      ) : state.step.type === "write-description" ? (
+        <Question />
+      ) : state.step.type === "choose-word" ? (
+        <Choice />
+      ) : state.step.type === "end-screen" ? (
+        <Scores />
+      ) : (
+        <div />
+      )}
     </div>
   );
 }

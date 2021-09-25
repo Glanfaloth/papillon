@@ -12,7 +12,7 @@ export type SubmitDescriptionMessage = {
   };
 };
 
-export type ChooseWordMessage  = {
+export type ChooseWordMessage = {
   type: "choose-word";
   properties: {
     username: string;
@@ -21,9 +21,11 @@ export type ChooseWordMessage  = {
     description: string;
     score: number;
   };
-}
+};
 
-export type ClientToServerMessageUnion = SubmitDescriptionMessage | ChooseWordMessage
+export type ClientToServerMessageUnion =
+  | SubmitDescriptionMessage
+  | ChooseWordMessage;
 
 export type WriteDescriptionData = {
   word: string;
@@ -61,7 +63,7 @@ export type Step =
 export type DescriptionSubmission = {
   word: string;
   description: string;
-  isAuthor: boolean
+  isAuthor: boolean;
 };
 
 export type UserState = { score: number; seenWords: DescriptionSubmission[] };
@@ -74,6 +76,12 @@ export type GlobalState = {
 };
 
 export type GlobalStateClient = GlobalState & { username: string };
+
+export type GlobalStateClientFrontend =
+  | (GlobalStateClient & { type: "connected" })
+  | { type: "loading" }
+  | { type: "room-initialised" };
+
 export interface RawState {
   state: string;
 }
