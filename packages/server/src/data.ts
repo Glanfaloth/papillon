@@ -4,18 +4,18 @@ import { WriteDescriptionData } from "@papillon/helpers/lib/types";
 export const writeDescriptionQuestions: WriteDescriptionData[] = [
   {
     word: "sprechen",
-    similarWords: ["sagen", "discutieren", 'mund'],
+    similarWords: ["sagen", "reden", "schwätzen", "plaudern", "diskutieren", "eklären", "kommunizieren"],
   },
   {
     word: "schreiben",
-    similarWords: ["kugelschreiber"],
+    similarWords: ["notieren", "kritzeln", "kratzeln", "verfassen", "Schreiber", "Kugelschreiber", "Bleistift"],
   },
   {
     word: "essen",
-    similarWords: ["lebensmittel"],
+    similarWords: ["konsumieren", "sich ernähren", "speisen", "Essen", "Mahlzeit", "Snack", "knabbern"],
   },
   {
-    word: "onkel",
-    similarWords: ["tante"],
+    word: "Onkel",
+    similarWords: ["Tante", "Cousin", "Cousine", "Bruder", "Schwester", "Ehemann", "Ehefrau", "Kinds"],
   },
 ];
