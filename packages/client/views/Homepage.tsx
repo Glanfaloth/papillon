@@ -4,17 +4,17 @@ import { GiButterfly } from "react-icons/gi";
 
 export default function Homepage() {
   return (
-    <div>
+    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
       <span className="inline-grid grid-cols-3 gap-x-4 items-center">
         <span>
-          <GiButterfly className="float-right" />
+          <GiButterfly className="float-right text-white" />
         </span>
-        <h1>Welcome to Papillon</h1>
+        <h1 className="text-white">Welcome to Papillon</h1>
         <span>
-          <GiButterfly className="float-left" />
+          <GiButterfly className="float-left text-white" />
         </span>
       </span>
-      <p>What is your name?</p>
+      <p className="text-white">What is your name?</p>
       <input type="text"></input>
       <Button onClick={() => {}}>Enter the Lobby</Button>
     </div>
