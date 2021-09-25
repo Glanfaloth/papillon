@@ -1,6 +1,6 @@
 import * as Colyseus from "colyseus.js";
 import { useCallback, useEffect } from "react";
-import { JoinOptions, MessageUnion } from "@papillon/helpers/lib/types";
+import { JoinOptions, ClientToServerMessageUnion } from "@papillon/helpers/lib/types";
 import { ROOM_NAME } from "@papillon/helpers/lib/const";
 
 class ActivityRoom {
@@ -22,7 +22,7 @@ class ActivityRoom {
     }
   };
 
-  sendMessage = (message: MessageUnion) => {
+  sendMessage = (message: ClientToServerMessageUnion) => {
     if (!this.room) throw new Error("No room found");
 
     this.room.send(message.type, message.properties);
@@ -44,7 +44,7 @@ export const useColyseus = () => {
   );
 
   const sendMessage = useCallback(
-    (message: MessageUnion) => activityRoom.sendMessage(message),
+    (message: ClientToServerMessageUnion) => activityRoom.sendMessage(message),
     []
   );
 
@@ -52,5 +52,5 @@ export const useColyseus = () => {
     return () => activityRoom.removeAllListeners();
   }, []);
 
-  return { connectToClient, sendMessage }
+  return { connectToClient, sendMessage };
 };
