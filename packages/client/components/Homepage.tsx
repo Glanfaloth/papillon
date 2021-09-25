@@ -1,5 +1,11 @@
 import React from "react";
 
 export default function Homepage() {
-  return <h1>Home</h1>;
+  return (
+    <div>
+      <button>Play</button>
+      <p>Name:</p>
+      <textarea>Peter</textarea>
+    </div>
+  );
 }

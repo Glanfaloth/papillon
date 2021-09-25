@@ -1,14 +1,18 @@
 import Head from "next/head";
-import Waiting from "../components/Waiting";
 import Homepage from "../components/Homepage";
+import Waiting from "../components/Waiting";
 import Question from "../components/Question";
+import Choice from "../components/Choice";
+import Score from "../components/Scores";
 
 export default function Home() {
   return (
     <div>
+      <Homepage />
       <Waiting />
       <Question />
-      <Homepage />
+      <Choice />
+      <Score />
     </div>
   );
 }
