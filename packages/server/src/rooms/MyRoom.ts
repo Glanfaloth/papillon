@@ -21,10 +21,12 @@ export class MyRoom extends Room<MyRoomState> {
   onJoin(client: Client, options: JoinOptions): void {
     const state = this.state.getState();
 
+    console.log({ state })
+
     if (state) {
       this.setState(
         new MyRoomState({
-          ...state,
+          step: state.step,
           byUser: { ...state.byUser, [options.username]: {} },
         })
       );
