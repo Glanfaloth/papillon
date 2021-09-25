@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as Colyseus from "colyseus.js";
+import { VscLoading } from "react-icons/vsc";
 
 const client = new Colyseus.Client("ws://localhost:2567");
 
@@ -15,5 +16,10 @@ export default function Waiting() {
       });
   }, []);
 
-  return <h1>Waiting</h1>;
+  return (
+    <div>
+      <h1>Waiting for other players...</h1>
+      <VscLoading />
+    </div>
+  );
 }
