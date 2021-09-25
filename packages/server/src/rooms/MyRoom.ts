@@ -1,6 +1,10 @@
 import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
-import { GlobalState, JoinOptions } from "@papillon/helpers/lib/types";
+import {
+  GlobalState,
+  JoinOptions,
+  UserState,
+} from "@papillon/helpers/lib/types";
 import { writeDescriptionQuestions } from "../data";
 
 const NUMBER_USERS = 3;
@@ -8,7 +12,7 @@ export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
     this.setState(
       new MyRoomState({
-        byUser: { [options.username]: {} },
+        byUser: { [options.username]: { score: undefined, seenWords: [] } },
         step: { type: "waiting", properties: undefined },
       })
     );
@@ -26,7 +30,10 @@ export class MyRoom extends Room<MyRoomState> {
     if (state) {
       const newGlobalState = {
         step: state.step,
-        byUser: { ...state.byUser, [options.username]: {} },
+        byUser: {
+          ...state.byUser,
+          [options.username]: { score: undefined, seenWords: [] } as UserState,
+        },
       };
 
       if (Object.keys(newGlobalState.byUser).length >= NUMBER_USERS) {
@@ -67,14 +74,37 @@ export class MyRoom extends Room<MyRoomState> {
             remainingTime: 15,
             properties: {
               userToWordAndDescription: Object.fromEntries(
-                Object.keys(newGlobalState.byUser).map((userId) => {
-                  const questionNotDoneYet = writeDescriptionQuestions.find((question) => question.word)
+                Object.keys(newGlobalState2.byUser).map((userId) => {
+                  const mySeenWords = newGlobalState2.byUser[
+                    userId
+                  ].seenWords.map(({ word }) => word);
 
-                  if (!questionNotDoneYet) throw new Error("no question found")
+                  // word has not been done by user1
+                  // word has been done by user 2
+                  const nextQuestion = Object.entries(newGlobalState2.byUser)
+                    .flatMap(([otherUserId, { seenWords: otherSeenWords }]) =>
+                      otherSeenWords.map(({ word, description }) => ({
+                        otherUserId,
+                        word,
+                        description,
+                      }))
+                    )
+                    .find(({ word }) => !mySeenWords.includes(word));
+
+                  const nextQuestionData = writeDescriptionQuestions.find(
+                    (question) => question.word === nextQuestion.word
+                  );
+
+                  if (!nextQuestion || !nextQuestionData)
+                    throw new Error("no question found");
 
                   return [
                     userId,
-                    writeDescriptionQuestions.find((question) => question),
+                    {
+                      word: nextQuestion.word,
+                      similarWords: nextQuestionData.similarWords,
+                      userDescription: nextQuestion.description,
+                    },
                   ];
                 })
               ),

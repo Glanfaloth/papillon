@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import {
   JoinOptions,
   ClientToServerMessageUnion,
-  RawState,
   GlobalStateClient,
 } from "@papillon/helpers/lib/types";
 import _ from "lodash";

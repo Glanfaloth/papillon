@@ -40,7 +40,12 @@ export type Step =
     }
   | { type: "end-screen"; properties: { resultByUser: { score: number } } };
 
-export type UserState = { score?: number, seenWords: [] };
+export type DescriptionSubmission = {
+  word: string,
+  description: string
+}
+
+export type UserState = { score?: number, seenWords: DescriptionSubmission[] };
 
 export type GlobalState = {
   byUser: {
