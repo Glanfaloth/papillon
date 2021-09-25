@@ -5,8 +5,10 @@ import { ColyseusContext, MyContext, useConnectColyseus } from "../colyseus/use-
 
 export default function Homepage({
   myContext: { context, setContext },
+  roomId,
 }: {
   myContext: MyContext;
+  roomId: string,
 }) {
   const [username, setUsername] = useState("");
   const state = useContext(ColyseusContext);
@@ -39,7 +41,7 @@ export default function Homepage({
           variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
           onClick={() => {
             if (!disabled) {
-              connectToClient({ username });
+              connectToClient({ username, roomId });
             }
           }}
         >

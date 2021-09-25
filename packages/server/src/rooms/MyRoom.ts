@@ -9,7 +9,7 @@ import {
 import { writeDescriptionQuestions } from "../data";
 import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
 
-const NUMBER_USERS = 1;
+const NUMBER_USERS = 2;
 
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
@@ -46,7 +46,7 @@ export class MyRoom extends Room<MyRoomState> {
     );
 
     this.onMessage(
-      "submit-description",
+      "choose-word",
       (client, message: ChooseWordMessage["properties"]) => {
         const state = this.state.getState();
         const userState = state.byUser[message.username] ?? {
@@ -97,6 +97,8 @@ export class MyRoom extends Room<MyRoomState> {
           },
         };
 
+        this.setState(new MyRoomState(newGlobalState));
+
         this.clock.start();
 
         const interval = this.clock.setInterval(() => {
@@ -138,6 +140,9 @@ export class MyRoom extends Room<MyRoomState> {
                     )
                     .find(({ word }) => !mySeenWords.includes(word));
 
+                  const nextQuestionData = writeDescriptionQuestions.find(
+                    (question) => question.word === nextQuestion.word
+                  );
                   console.log(
                     Object.entries(newGlobalState2.byUser).flatMap(
                       ([otherUserId, { seenWords: otherSeenWords }]) =>
@@ -146,11 +151,9 @@ export class MyRoom extends Room<MyRoomState> {
                           word,
                           description,
                         }))
-                    )
-                  );
-
-                  const nextQuestionData = writeDescriptionQuestions.find(
-                    (question) => question.word === nextQuestion.word
+                    ),
+                    nextQuestion,
+                    nextQuestionData
                   );
 
                   if (!nextQuestion || !nextQuestionData)
@@ -169,21 +172,33 @@ export class MyRoom extends Room<MyRoomState> {
             },
           };
 
+          this.setState(new MyRoomState(newGlobalState2))
+
           const interval2 = this.clock.setInterval(() => {
             const state = this.state.getState();
-            if (state.step.type === "write-description") {
+            if (state.step.type === "choose-word") {
               state.step.remainingTime = Math.max(
                 0,
                 state.step.remainingTime - 0.1
               );
+              this.setState(new MyRoomState(state))
+            }
+          }, 100);
+
+          this.clock.setTimeout(() => {
+            interval2.clear();
+
+            const state = this.state.getState();
+            state.step = {
+              type: "end-screen",
+              properties: undefined
             }
 
-            this.setState(new MyRoomState(newGlobalState));
-          }, 100);
+            this.setState(new MyRoomState(state));
+
+          }, 20_000);
         }, 20_000);
       }
-
-      this.setState(new MyRoomState(newGlobalState));
     } else {
       this.onCreate(options);
     }

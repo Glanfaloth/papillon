@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as Colyseus from "colyseus.js";
 import { JoinOptions } from "@papillon/helpers/lib/types";
-import { ROOM_NAME } from "@papillon/helpers/lib/const";
+import { ROOM_ID } from "@papillon/helpers/lib/const";
 
 export default function Waiting() {
 

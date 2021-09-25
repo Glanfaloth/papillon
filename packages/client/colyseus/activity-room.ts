@@ -6,7 +6,6 @@ import {
   GlobalStateClient,
   GlobalStateClientFrontend,
 } from "@papillon/helpers/lib/types";
-import { ROOM_NAME } from "@papillon/helpers/lib/const";
 import _ from "lodash";
 import { getClientStateFromRawState } from "./utils";
 
@@ -21,10 +20,13 @@ export class ActivityRoom {
     this.client = new Colyseus.Client("ws://localhost:2567");
   }
 
-  connect = async (options: JoinOptions): Promise<void> => {
+  connect = async ({ roomId, ...options }: JoinOptions): Promise<void> => {
     try {
+      console.log({roomId})
+      this.client.getAvailableRooms().then(console.log)
+      
       const room = (await this.client.joinOrCreate(
-        ROOM_NAME,
+        roomId,
         options
       )) as Colyseus.Room<RawState>;
 
@@ -32,7 +34,7 @@ export class ActivityRoom {
       this.sessionId = room.sessionId;
       this.username = options.username;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       throw new Error(error);
     }
   };

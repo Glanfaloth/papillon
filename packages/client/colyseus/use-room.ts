@@ -47,11 +47,16 @@ export const useConnectColyseus = (
 
     await activityRoom.connect(options);
 
-    setConnectedToClient(true)
+    setConnectedToClient(true);
   };
 
   useEffect(() => {
-    if (!activityRoom || state.type !== "room-initialised" || !connectedToClient) return;
+    if (
+      !activityRoom ||
+      state.type !== "room-initialised" ||
+      !connectedToClient
+    )
+      return;
     activityRoom.onStateChange(setState);
   }, [setState, state.type, connectedToClient]);
 

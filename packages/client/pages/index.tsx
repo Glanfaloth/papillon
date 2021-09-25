@@ -5,6 +5,7 @@ import Choice from "../views/Choice";
 import Scores from "../views/Scores";
 import { ColyseusContext, MyContext } from "../colyseus/use-room";
 import { useContext, useEffect } from "react";
+import { ROOM_ID } from "@papillon/helpers/lib/const";
 
 export default function Home({ myContext }: { myContext: MyContext }) {
   const state = useContext(ColyseusContext);
@@ -14,9 +15,9 @@ export default function Home({ myContext }: { myContext: MyContext }) {
   }, [state]);
 
   return (
-    <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-full flex-row p-20">
+    <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-screen flex-row p-20">
       {state.type !== "connected" ? (
-        <Homepage myContext={myContext} />
+        <Homepage myContext={myContext} roomId={ROOM_ID}/>
       ) : state.step.type === "waiting" ? (
         <Lobby />
       ) : state.step.type === "write-description" ? (

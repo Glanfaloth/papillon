@@ -1,17 +1,21 @@
 import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
 import React, { useContext, useRef, useState } from "react";
-import { ColyseusContext } from "../colyseus/use-room";
+import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
   const [wordCount, setWordCount] = useState(0);
   const wordList = ["hello", "world"];
+  const [submitted, setSubmitted] = useState(false);
   var regexFromWordList = new RegExp(wordList.join("|"), "gi");
 
   const state = useContext(ColyseusContext);
+
+  const { sendMessage } = useColyseus();
 
   function applyHighlights(text: string) {
     text = text
@@ -20,13 +24,13 @@ export default function Question() {
     return text;
   }
 
-  if (state.type !== "connected" || state.step.type !== "write-description")
-    return <div />;
+  // if (state.type !== "connected" || state.step.type !== "write-description")
+  //   return <div />;
 
   const progressPercentage =
     100 -
     Math.floor(
-      (100 * (QUESTION_DURATION_SECONDS - state.step.remainingTime)) /
+      (100 * (QUESTION_DURATION_SECONDS - (state.step?.remainingTime ?? 0))) /
         QUESTION_DURATION_SECONDS
     );
   const widthPercentage = (progressPercentage - 1) / 100 > 0 ? 100 : 0;
@@ -41,14 +45,18 @@ export default function Question() {
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
       </h3>
-      <i className="text-gray-500">Hover to see its definition in English!</i>
       <div className="has-tooltip">
         <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
           speak, say, talk
         </span>
-        Sprechen
+        <div className="flex flex-row content-center">
+          <h2 className="mr-2">Sprechen</h2>
+          <h2>
+            <AiOutlineQuestionCircle className="text-blue-500" />
+          </h2>
+        </div>
       </div>
-      <div className="container">
+      <div className="container ">
         <div className="backdrop">
           <span
             dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
@@ -56,7 +64,9 @@ export default function Question() {
           ></span>
         </div>
         <textarea
-          className="border-gray-400 border-2 w-full"
+          className={`border-gray-400 border-2 w-full ${
+            submitted && "text-gray-500"
+          }`}
           name="description"
           value={answer}
           onChange={(e) => {
@@ -72,24 +82,34 @@ export default function Question() {
           {wordCount} words too similar, you'll be penalized.
         </h2>
       )}
-      <div>
-        {progressPercentage < 20 && (
+      <div className="mt-10">
+        {progressPercentage < 20 && !submitted && (
           <Button
             className={progressPercentage < 20 && "animate-weakPing"}
-            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
-            onClick={() => {
-              if (!disabled) {
-              }
-            }}
+            variant={
+              submitted ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY
+            }
           >
             Submit
           </Button>
         )}
         <div className={progressPercentage < 20 && "absolute"}>
           <Button
-            variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
+            variant={submitted ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
             onClick={() => {
-              if (!disabled) {
+              if (!submitted) {
+                setSubmitted(true);
+                sendMessage({
+                  type: "submit-description",
+                  properties: {
+                    username: state.username ?? 0,
+                    word: state.step.properties.userToQuestionData[
+                      state.username
+                    ].word,
+                    score: 0,
+                    description: answer,
+                  },
+                });
               }
             }}
           >
