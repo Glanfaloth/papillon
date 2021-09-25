@@ -3,6 +3,7 @@ import React, { useContext, useRef, useState } from "react";
 import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
@@ -42,12 +43,17 @@ export default function Question() {
       <h3 className="text-gray-600 pt-8">
         How would you describe the following word?
       </h3>
-      <i className="text-gray-500">Hover to see its definition in English!</i>
+
       <div className="has-tooltip">
         <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
           speak, say, talk
         </span>
-        Sprechen
+        <div className="flex flex-row content-center">
+          <h2 className="mr-2">Sprechen</h2>
+          <h2>
+            <AiOutlineQuestionCircle className="text-blue-500" />
+          </h2>
+        </div>
       </div>
       <div className="container">
         <div className="backdrop">
@@ -82,7 +88,12 @@ export default function Question() {
               if (!disabled) {
                 sendMessage({
                   type: "submit-description",
-                  properties: { username: (state.username ?? 0), word: '', score: 0, description: answer },
+                  properties: {
+                    username: state.username ?? 0,
+                    word: "",
+                    score: 0,
+                    description: answer
+                  }
                 });
               }
             }}
