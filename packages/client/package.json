@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@papillon/helpers": "0.0.0",
     "autoprefixer": "^10.3.5",
     "colyseus.js": "^0.14.13",
     "date-fns": "^2.11.1",

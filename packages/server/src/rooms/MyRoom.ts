@@ -1,5 +1,6 @@
 import { Room, Client } from "colyseus";
 import { MyRoomState } from "./schema/MyRoomState";
+import { JoinOptions } from '@papillon/helpers/lib/types/message';
 
 export class MyRoom extends Room<MyRoomState> {
 
@@ -14,8 +15,8 @@ export class MyRoom extends Room<MyRoomState> {
 
   }
 
-  onJoin (client: Client, options: any) {
-    console.log(client.sessionId, "joined!");
+  onJoin (client: Client, options: JoinOptions): void {
+    console.log(client.sessionId, "joined!", options);
   }
 
   onLeave (client: Client, consented: boolean) {
