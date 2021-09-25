@@ -12,8 +12,8 @@ export type Step =
   | {
       type: "question";
       properties: {
-        questionData: // TODO(michael)
-        {};
+        // TODO(michael)
+        questionData: {};
       };
     }
   | { type: "question-time-elapsed" };
@@ -33,5 +33,5 @@ export type StateForUser = {
 };
 
 export interface RawState {
-  state: string
+  state: string;
 }

@@ -47,13 +47,15 @@ export class ActivityRoom {
     this.room.removeAllListeners();
   };
 
-  onStateChange = (callback: (state: StateForUser) => void) => {
+  onStateChange = (
+    callback: (state: StateForUser & { username: string }) => void
+  ) => {
     if (!this.room) throw new Error("No room found");
 
-    this.room.onStateChange((all) => {
-      const stateForUser = getUserStateFromRawState(all.state, this.username);
+    this.room.onStateChange(({ state }) => {
+      const stateForUser = getUserStateFromRawState(state, this.username);
 
-      callback(stateForUser);
+      callback({ ...stateForUser, username: this.username });
     });
   };
 }
