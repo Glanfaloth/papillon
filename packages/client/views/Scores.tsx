@@ -40,7 +40,7 @@ export default function Scores() {
     <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 overflow-hidden">
       <div className="shadow-lg rounded-xl bg-white p-8">
         <h1>Scores</h1>
-        <BarChart width={300} height={100} data={sortedData}>
+        <BarChart width={600} height={200} data={sortedData}>
           <Bar dataKey="points">
             {data.map((entry, index) => (
               <Cell fill={bar_color[index % 4]} key={`cell-${index}`} />
