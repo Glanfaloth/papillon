@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import _ from "lodash";
+import { GiWhiteBook } from "react-icons/gi";
 
 const data = [
   {
@@ -38,6 +39,12 @@ export default function Scores() {
       <h1>Scores</h1>
       <BarChart width={300} height={100} data={sortedData}>
         <Bar dataKey="points" fill="white" />
+        <XAxis
+          dataKey="name"
+          tick={{ stroke: "white", fill: "white" }}
+          axisLine={false}
+          tickLine={false}
+        />
       </BarChart>
       <h1>Done</h1>
     </div>
