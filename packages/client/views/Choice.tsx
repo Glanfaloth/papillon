@@ -11,7 +11,7 @@ export default function Choice() {
       <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
         <ProgressBar progressPercentage={80} isDanger={false} />
         <h3 className="pt-8 text-gray-600">
-          Which word is does the following describe?
+          Which word corresponds to the following description?
         </h3>
         <h1 className="pb-4">
           Es ist deine Mutter! Meine ist es jedoch nicht.
