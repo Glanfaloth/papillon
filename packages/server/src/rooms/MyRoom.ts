@@ -8,7 +8,7 @@ import {
 } from "@papillon/helpers/lib/types";
 import { writeDescriptionQuestions } from "../data";
 
-const NUMBER_USERS = 2;
+const NUMBER_USERS = 1;
 
 export class MyRoom extends Room<MyRoomState> {
   onCreate(options: JoinOptions) {
@@ -32,7 +32,7 @@ export class MyRoom extends Room<MyRoomState> {
         userState.seenWords.push({
           word: message.word,
           description: message.description,
-          isAuthor: true
+          isAuthor: true,
         });
 
         this.setState(
@@ -43,8 +43,6 @@ export class MyRoom extends Room<MyRoomState> {
         );
       }
     );
-
-
 
     this.onMessage(
       "submit-description",
@@ -59,7 +57,7 @@ export class MyRoom extends Room<MyRoomState> {
         userState.seenWords.push({
           word: message.word,
           description: message.description,
-          isAuthor: false
+          isAuthor: false,
         });
 
         this.setState(
