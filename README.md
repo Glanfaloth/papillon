@@ -1,7 +1,10 @@
 # papillon
 
+## Install `lerna`
+`$ npm i -g lerna`
+
 ## Install
-`$ npx lerna bootstrap`
+`$ lerna bootstrap`
 
 ## Run
-`$ npx lerna run start`
+`$ lerna run start --stream`
