@@ -34,14 +34,22 @@ module.exports = {
           '75%, 100%': {
             transform: 'scale(1.5)',
             opacity: '0',
-          }
+          },
         },
         weakerPing: {
           '75%, 100%': {
             transform: 'scaleX(1.03125) scaleY(1.125)',
             opacity: '0',
-          }
-        }
+          },
+        },
+        diminishX: {
+          '0%': {
+            width: '1'
+          },
+          '100%': {
+            width: '0'
+          },
+        },
       },
       animation: {
         rotate0: 'rotate0 2.5s infinite',
@@ -49,6 +57,7 @@ module.exports = {
         rotate2: 'rotate2 2.5s infinite',
         weakPing: 'weakPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
         weakerPing: 'weakerPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+        diminishX: 'diminishX 15s cubic-bezier(0, 0, 1, 1)',
       }
     },
   },

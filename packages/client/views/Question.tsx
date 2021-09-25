@@ -29,11 +29,12 @@ export default function Question() {
       (100 * (QUESTION_DURATION_SECONDS - state.step.remainingTime)) /
         QUESTION_DURATION_SECONDS
     );
+  const widthPercentage = (progressPercentage - 1) / 100 > 0 ? 100 : 0;
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
       <ProgressBar
-        progressPercentage={progressPercentage}
+        progressPercentage={widthPercentage}
         isDanger={progressPercentage < 20}
       />
 
