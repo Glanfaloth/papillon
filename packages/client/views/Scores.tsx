@@ -30,13 +30,13 @@ const data = [
     points: 12,
   },
   {
-    name: "Fruit",
-    id: "Fruit",
+    name: "Blueberry",
+    id: "Blueberry",
     points: 3,
   },
 ];
 
-const bar_color = ["#cb4335", "#28b463", "#3498db", "#f1c40f"];
+const bar_color = ["#5187fc", "#53e48f", "#ff73dc", "#ff4f4f"];
 
 export default function Scores() {
   const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
