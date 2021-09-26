@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ColyseusContext, useSetupColyseus } from "../colyseus/use-room";
 import "../styles/global.css";
 import "../styles/highlight.css";
+import "../styles/butterfly.css";
 
 export default function App({ Component, pageProps }) {
   const [context, setContext] = useState<GlobalStateClientFrontend>({

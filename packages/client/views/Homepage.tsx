@@ -1,26 +1,31 @@
 import React, { useContext, useState } from "react";
 import { Button, ButtonVariant } from "../components/Button";
 import { GiButterfly } from "react-icons/gi";
-import { ColyseusContext, MyContext, useConnectColyseus } from "../colyseus/use-room";
+import {
+  ColyseusContext,
+  MyContext,
+  useConnectColyseus
+} from "../colyseus/use-room";
 
 export default function Homepage({
   myContext: { context, setContext },
-  roomId,
+  roomId
 }: {
   myContext: MyContext;
-  roomId: string,
+  roomId: string;
 }) {
   const [username, setUsername] = useState("");
   const state = useContext(ColyseusContext);
   const { connectToClient } = useConnectColyseus(context, setContext);
 
   const disabled = !username;
-  const userSubmittedName = state.type === 'connected';
+  const userSubmittedName = state.type === "connected";
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full h-full	">
       {/* Use this to render username form vs spinner */}
-      {userSubmittedName ? "waiting" : "fill in form..."}
+      {/* {userSubmittedName ? "waiting" : "fill in form..."} */}
+
       <div className="space-y-10">
         <div className="inline-grid grid-cols-3 gap-x-2 items-center">
           <span>
@@ -29,6 +34,20 @@ export default function Homepage({
           <h1>Welcome to Papillon</h1>
           <span>
             <GiButterfly className="float-left " />
+          </span>
+          {/* Reference: https://codepen.io/dazulu/pen/aOzqvz */}
+          <span>
+            <div className="butterfly">
+              <div className="wing">
+                <div className="bit"></div>
+                <div className="bit"></div>
+              </div>
+              <div className="wing">
+                <div className="bit"></div>
+                <div className="bit"></div>
+              </div>
+            </div>
+            <div className="shadow"></div>
           </span>
         </div>
         <h3>What is your name?</h3>
