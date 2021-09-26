@@ -28,9 +28,12 @@ export default function Scores() {
       name: u[0],
     }))
     .filter((v) => v && v.id !== "undefined");
+
   useEffect(() => {
     console.log("data updated", data);
   }, [data]);
+
+  const winner = _.maxBy(data, e => e.score)
 
   const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
   return (
