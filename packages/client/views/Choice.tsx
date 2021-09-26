@@ -35,9 +35,11 @@ export default function Choice() {
   );
   // .push(chooseWordData.word);
 
+  const widthPercentage = (progressPercentage - 1) / 100 > 0 ? 100 : 0;
+
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
-      <ProgressBar progressPercentage={progressPercentage} isDanger={false} />
+      <ProgressBar progressPercentage={widthPercentage} isDanger={progressPercentage < 20} />
       <h3 className="pt-8 text-gray-600">
         Which word corresponds to the following description?
       </h3>
