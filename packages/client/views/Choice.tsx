@@ -51,7 +51,8 @@ export default function Choice() {
             type: "choose-word",
             properties: {
               username: state.username ?? 0,
-              descriptionAuthorUsername: chooseWordData.authorUsername,
+              authorUsername: chooseWordData.authorUsername,
+              authorScore: 5,
               word: chooseWordData.word,
               description: chooseWordData.userDescription,
               score: 10,
