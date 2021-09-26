@@ -50,6 +50,16 @@ module.exports = {
             width: '0'
           },
         },
+        entry: {
+          '0%, 90%': {
+            transform: 'scale(1.2)',
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: '1',
+          },
+        },
       },
       animation: {
         rotate0: 'rotate0 2.5s infinite',
@@ -58,6 +68,7 @@ module.exports = {
         weakPing: 'weakPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
         weakerPing: 'weakerPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
         diminishX: 'diminishX 15s cubic-bezier(0, 0, 1, 1)',
+        entry: 'entry 6s ease-in'
       }
     },
   },
