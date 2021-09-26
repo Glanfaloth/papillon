@@ -121,7 +121,8 @@ export default function Question() {
       </div>
       }
       {widthPercentage == 0 && <div>
-        <h2 className="mr-2">Great!</h2>
+        <h2 className="mr-2">Great!<br/><br/></h2>
+        <h1 className="text-4xl animate-bounce">😊</h1>
         <h3 className="text-gray-600 pt-8">
           Now let us have a look at other people's descriptions!
         </h3>
