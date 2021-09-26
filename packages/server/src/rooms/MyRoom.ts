@@ -128,6 +128,8 @@ export class MyRoom extends Room<MyRoomState> {
 
           const newGlobalState2 = this.state.getState();
 
+          const wordsSuggestedToOtherUsers: string[] = [];
+
           newGlobalState2.step = {
             type: "choose-word",
             remainingTime: QUESTION_DURATION_SECONDS,
@@ -138,36 +140,36 @@ export class MyRoom extends Room<MyRoomState> {
                     userId
                   ].seenWords.map(({ word }) => word);
 
+                  const allWordsFlattened = Object.entries(
+                    newGlobalState2.byUser
+                  ).flatMap(([otherUserId, { seenWords: otherSeenWords }]) =>
+                    otherSeenWords.map(({ word, description }) => ({
+                      otherUserId,
+                      word,
+                      description,
+                    }))
+                  );
+
                   // word has not been done by user1
                   // word has been done by user 2
-                  const nextQuestion = Object.entries(newGlobalState2.byUser)
-                    .flatMap(([otherUserId, { seenWords: otherSeenWords }]) =>
-                      otherSeenWords.map(({ word, description }) => ({
-                        otherUserId,
-                        word,
-                        description,
-                      }))
-                    )
-                    .find(({ word }) => !mySeenWords.includes(word));
+                  const nextQuestion =
+                    allWordsFlattened.find(
+                      ({ word }) =>
+                        !mySeenWords.includes(word) &&
+                        !wordsSuggestedToOtherUsers.includes(word)
+                    ) ??
+                    allWordsFlattened.find(
+                      ({ word }) => !mySeenWords.includes(word)
+                    );
 
                   const nextQuestionData = writeDescriptionQuestions.find(
                     (question) => question.word === nextQuestion.word
                   );
-                  console.log(
-                    Object.entries(newGlobalState2.byUser).flatMap(
-                      ([otherUserId, { seenWords: otherSeenWords }]) =>
-                        otherSeenWords.map(({ word, description }) => ({
-                          otherUserId,
-                          word,
-                          description,
-                        }))
-                    ),
-                    nextQuestion,
-                    nextQuestionData
-                  );
 
                   if (!nextQuestion || !nextQuestionData)
                     throw new Error("no question found");
+
+                  wordsSuggestedToOtherUsers.push(nextQuestion.word);
 
                   return [
                     userId,
@@ -206,7 +208,7 @@ export class MyRoom extends Room<MyRoomState> {
             };
 
             this.setState(new MyRoomState(state));
-          }, 20_000);
+          }, QUESTION_DURATION_SECONDS * 1000);
         }, 20_000);
       }
     } else {
