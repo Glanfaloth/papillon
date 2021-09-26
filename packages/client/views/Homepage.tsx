@@ -22,7 +22,7 @@ export default function Homepage({
   const userSubmittedName = state.type === "connected";
 
   return (
-    <div className="shadow-xl bg-white p-8 rounded-xl	flex">
+    <div className="shadow-xl bg-white p-2 py-8 md:p-8 rounded-xl flex">
       <span className="py-12 my-12">
         <div className="butterfly">
           <div className="wing">
@@ -42,6 +42,7 @@ export default function Homepage({
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="mx-4 md:mx-0 md:w-auto"
         />
         <Button
           variant={disabled ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY}
