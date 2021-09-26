@@ -37,7 +37,7 @@ export default function Scores() {
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
       <h1>Scores</h1>
       <BarChart width={600} height={200} data={sortedData}>
-        <Bar dataKey="points" label={{ position: "top" }}>
+        <Bar dataKey="score" label={{ position: "top" }}>
           {data.map((entry, index) => (
             <Cell fill={bar_color[index % 4]} key={`cell-${index}`} />
           ))}
