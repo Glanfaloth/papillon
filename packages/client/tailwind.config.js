@@ -67,7 +67,7 @@ module.exports = {
         rotate2: 'rotate2 2.5s infinite',
         weakPing: 'weakPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
         weakerPing: 'weakerPing 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-        diminishX: 'diminishX 15s cubic-bezier(0, 0, 1, 1)',
+        diminishX: 'diminishX 20s cubic-bezier(0, 0, 1, 1)',
         entry: 'entry 6s ease-in'
       }
     },

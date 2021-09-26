@@ -28,7 +28,7 @@ export default function Choice() {
   const options: string[] = useMemo(
     () =>
       _.shuffle([
-        ...chooseWordData.similarWords.slice(0, 3),
+        ...chooseWordData.confusingWords,
         chooseWordData.word,
       ]),
     []
@@ -41,7 +41,7 @@ export default function Choice() {
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
       <ProgressBar progressPercentage={widthPercentage} isDanger={progressPercentage < 20} />
       <h3 className="pt-8 text-gray-600">
-        Which word corresponds to the following description?
+        Welches Wort entspricht der Beschreibung?
       </h3>
       {/* <h1 className="pb-4">Es ist deine Mutter! Meine ist es jedoch nicht.</h1> */}
       <h1>{chooseWordData.userDescription}</h1>

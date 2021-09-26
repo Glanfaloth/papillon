@@ -32,6 +32,7 @@ export type ClientToServerMessageUnion =
 export type WriteDescriptionData = {
   word: string;
   similarWords: string[];
+  confusingWords: string[];
   englishSynonyms: string[]
 };
 
@@ -39,6 +40,7 @@ export type ChooseWordData = {
   word: string;
   authorUsername: string;
   similarWords: string[];
+  confusingWords: string[];
   userDescription: string;
 };
 

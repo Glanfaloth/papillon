@@ -42,7 +42,7 @@ export default function Scores() {
       className="shadow-xl bg-white p-8 rounded-xl w-full
     "
     >
-      <h1>Scores</h1>
+      <h1>Punkte</h1>
       <div className="h-52 w-full">
         <ResponsiveContainer>
           <BarChart data={sortedData}>
@@ -74,7 +74,7 @@ export default function Scores() {
       <div className="animate-entry">
         <br />
         <br />
-        <h1>The winner is {winner.name}!</h1>
+        <h1>Der Gewinner ist {winner.name}!</h1>
         <br />
         <br />
       </div>

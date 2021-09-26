@@ -37,7 +37,7 @@ export default function Homepage({
         <div className="shadow"></div>
       </span>
       <div className="space-y-4">
-        <h3>What is your name?</h3>
+        <h3>Wie ist dein Name?</h3>
         <input
           type="text"
           value={username}
@@ -52,7 +52,7 @@ export default function Homepage({
             }
           }}
         >
-          Enter the Lobby
+          Lobby betreten
         </Button>
       </div>
     </div>

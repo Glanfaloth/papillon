@@ -177,6 +177,7 @@ export class MyRoom extends Room<MyRoomState> {
                       word: nextQuestion.word,
                       authorUsername: nextQuestion.otherUserId,
                       similarWords: nextQuestionData.similarWords,
+                      confusingWords: nextQuestionData.confusingWords,
                       userDescription: nextQuestion.description,
                     },
                   ];

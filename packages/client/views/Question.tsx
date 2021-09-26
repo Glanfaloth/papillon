@@ -79,7 +79,7 @@ export default function Question() {
       {widthPercentage != 0 && (
         <div>
           <h3 className="text-gray-600 pt-8">
-            How would you describe the following word?
+            Versuche, das Wort zu beschreiben. Benütze nicht: {question.similarWords.join(', ')}.
           </h3>
           <div className="has-tooltip">
             <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
@@ -110,11 +110,11 @@ export default function Question() {
               }}
             ></textarea>
           </div>
-          {matchingSimilarWordCount > 0 && (
+          {/* {matchingSimilarWordCount > 0 && (
             <h2 className="text-red-600">
               {matchingSimilarWordCount} words too similar, you'll be penalized.
             </h2>
-          )}
+          )} */}
           <div className="mt-10">
             {progressPercentage < 20 && !submitted && (
               <Button
@@ -123,7 +123,7 @@ export default function Question() {
                   submitted ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY
                 }
               >
-                Submit
+                Bestätigen
               </Button>
             )}
             <div className={progressPercentage < 20 && "absolute"}>
@@ -133,7 +133,7 @@ export default function Question() {
                 }
                 onClick={submitDescription}
               >
-                Submit
+                Bestätigen
               </Button>
             </div>
           </div>
@@ -142,13 +142,13 @@ export default function Question() {
       {widthPercentage == 0 && (
         <div>
           <h2 className="mr-2">
-            Great!
+            Grossartig!
             <br />
             <br />
           </h2>
           <h1 className="text-4xl animate-bounce">😊</h1>
           <h3 className="text-gray-600 pt-8">
-            Now let us have a look at other people's descriptions!
+            Kannst du erraten, was die anderen beschreiben?
           </h3>
         </div>
       )}
