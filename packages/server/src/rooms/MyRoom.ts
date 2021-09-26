@@ -61,10 +61,20 @@ export class MyRoom extends Room<MyRoomState> {
           isAuthor: false,
         });
 
+        const authorState = state.byUser[message.authorUsername] ?? {
+          score: 0,
+          seenWords: [],
+        };
+        authorState.score = message.authorScore + authorState.score;
+
         this.setState(
           new MyRoomState({
             step: state.step,
-            byUser: { ...state.byUser, [message.username]: userState },
+            byUser: {
+              ...state.byUser,
+              [message.username]: userState,
+              [message.authorUsername]: authorState,
+            },
           })
         );
       }
@@ -163,6 +173,7 @@ export class MyRoom extends Room<MyRoomState> {
                     userId,
                     {
                       word: nextQuestion.word,
+                      authorUsername: nextQuestion.otherUserId,
                       similarWords: nextQuestionData.similarWords,
                       userDescription: nextQuestion.description,
                     },
@@ -172,7 +183,7 @@ export class MyRoom extends Room<MyRoomState> {
             },
           };
 
-          this.setState(new MyRoomState(newGlobalState2))
+          this.setState(new MyRoomState(newGlobalState2));
 
           const interval2 = this.clock.setInterval(() => {
             const state = this.state.getState();
@@ -181,7 +192,7 @@ export class MyRoom extends Room<MyRoomState> {
                 0,
                 state.step.remainingTime - 0.1
               );
-              this.setState(new MyRoomState(state))
+              this.setState(new MyRoomState(state));
             }
           }, 100);
 
@@ -191,11 +202,10 @@ export class MyRoom extends Room<MyRoomState> {
             const state = this.state.getState();
             state.step = {
               type: "end-screen",
-              properties: undefined
-            }
+              properties: undefined,
+            };
 
             this.setState(new MyRoomState(state));
-
           }, 20_000);
         }, 20_000);
       }
