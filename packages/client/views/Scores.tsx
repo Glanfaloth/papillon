@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useContext, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -12,33 +12,26 @@ import {
 } from "recharts";
 import _ from "lodash";
 import { GiWhiteBook } from "react-icons/gi";
-
-const data = [
-  {
-    name: "Tomato",
-    id: "Tomato",
-    points: 10,
-  },
-  {
-    name: "Pesca",
-    id: "Pesca",
-    points: 22,
-  },
-  {
-    name: "Kiwi",
-    id: "Kiwi",
-    points: 12,
-  },
-  {
-    name: "Blueberry",
-    id: "Blueberry",
-    points: 3,
-  },
-];
+import { ColyseusContext } from "../colyseus/use-room";
 
 const bar_color = ["#5187fc", "#53e48f", "#ff73dc", "#ff4f4f"];
 
+// const data = useMemo(() => )
+
 export default function Scores() {
+  const state = useContext(ColyseusContext);
+
+  const data = Object.entries(state.byUser)
+    .map((u: any) => ({
+      score: u[1].score,
+      id: u[0],
+      username: u[0],
+    }))
+    .filter((v) => v && v.id !== "undefined");
+  useEffect(() => {
+    console.log("data updated", data);
+  }, [data]);
+
   const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
