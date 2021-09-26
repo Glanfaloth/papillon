@@ -24,7 +24,7 @@ export default function Scores() {
 
   const data = Object.entries(state.byUser)
     .map((u: any) => ({
-      score: u[1].score,
+      score: Math.floor(u[1].score),
       id: u[0],
       name: u[0],
     }))
