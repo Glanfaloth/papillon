@@ -11,7 +11,7 @@ export default function Choice() {
   const words = ["Sprechen", "Apfel", "Honig", "Tomate"];
   const [selected, setSelected] = useState<null | string>(null);
 
-  const state = useContext(ColyseusContext);
+  const state: any = useContext(ColyseusContext);
 
   const { sendMessage } = useColyseus();
 

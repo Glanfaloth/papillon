@@ -1,21 +1,35 @@
+import Homepage from "../views/Homepage";
+import Lobby from "../views/Lobby";
+
+import Choice from "../views/Choice";
+import Scores from "../views/Scores";
+import { MyContext } from "../colyseus/use-room";
+import { ROOM_ID } from "@papillon/helpers/lib/const";
+
+export default function Home({ myContext }: { myContext: MyContext }) {
+  return (
+    <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-screen flex-row p-4 md:p-20 lg:p-64">
+      <Question />
+    </div>
+  );
+}
+
 import { QUESTION_DURATION_SECONDS } from "@papillon/helpers/lib/const";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
-export default function Question() {
+function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
   const [wordCount, setWordCount] = useState(0);
   const wordList = ["hello", "world"];
   const [submitted, setSubmitted] = useState(false);
   var regexFromWordList = new RegExp(wordList.join("|"), "gi");
-
-  const state: any = useContext(ColyseusContext);
-
-  const { sendMessage } = useColyseus();
+  const widthPercentage = 50;
+  const progressPercentage = 50;
 
   function applyHighlights(text: string) {
     text = text
@@ -23,44 +37,16 @@ export default function Question() {
       .replace(regexFromWordList, "<mark>$&</mark>");
     return text;
   }
-
-  const submitDescription = () => {
-    if (!submitted) {
-      setSubmitted(true);
-      sendMessage({
-        type: "submit-description",
-        properties: {
-          username: state.username ?? 0,
-          word: state.step.properties.userToQuestionData[state.username].word,
-          score: 0,
-          description: answer,
-        },
-      });
-    }
-  };
-
-  const progressPercentage =
-    100 -
-    Math.floor(
-      (100 * (QUESTION_DURATION_SECONDS - (state.step?.remainingTime ?? 0))) /
-        QUESTION_DURATION_SECONDS
-    );
-  const widthPercentage = (progressPercentage - 1) / 100 > 0 ? 100 : 0;
-
-  useEffect(() => {
-    if (progressPercentage === 0 && !submitted) submitDescription();
-  }, [progressPercentage, submitted]);
-
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
-      {widthPercentage != 0 && (
+      {widthPercentage >= 0 && (
         <ProgressBar
           progressPercentage={widthPercentage}
           isDanger={progressPercentage < 20}
         />
       )}
 
-      {widthPercentage != 0 && (
+      {widthPercentage >= 0 && (
         <div>
           <h3 className="text-gray-600 pt-8">
             How would you describe the following word?
@@ -76,7 +62,7 @@ export default function Question() {
               </h2>
             </div>
           </div>
-          <div className="container ">
+          <div className="container">
             <div className="backdrop">
               <span
                 dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
@@ -118,7 +104,11 @@ export default function Question() {
                 variant={
                   submitted ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY
                 }
-                onClick={submitDescription}
+                onClick={() => {
+                  if (!submitted) {
+                    setSubmitted(true);
+                  }
+                }}
               >
                 Submit
               </Button>
@@ -126,7 +116,7 @@ export default function Question() {
           </div>
         </div>
       )}
-      {widthPercentage == 0 && (
+      {widthPercentage <= 0 && (
         <div>
           <h2 className="mr-2">
             Great!

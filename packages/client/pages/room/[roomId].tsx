@@ -17,7 +17,7 @@ export default function Home({ myContext }: { myContext: MyContext }) {
   }, [state]);
 
   return (
-    <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-screen flex-row p-20">
+    <div className="space-y-10 bg-gradient-to-r to-pink-600 from-blue-700 w-screen h-screen flex-row p-4 md:p-20 lg:p-64">
       {state.type !== "connected" ? (
         <Homepage myContext={myContext} roomId={roomId} />
       ) : state.step.type === "waiting" ? (

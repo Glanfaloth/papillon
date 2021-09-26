@@ -13,13 +13,14 @@ import {
 import _ from "lodash";
 import { GiWhiteBook } from "react-icons/gi";
 import { ColyseusContext } from "../colyseus/use-room";
+import { GlobalState } from "../../helpers/lib/types";
 
 const bar_color = ["#5187fc", "#53e48f", "#ff73dc", "#ff4f4f"];
 
 // const data = useMemo(() => )
 
 export default function Scores() {
-  const state = useContext(ColyseusContext);
+  const state: any = useContext(ColyseusContext);
 
   const data = Object.entries(state.byUser)
     .map((u: any) => ({
@@ -42,7 +43,7 @@ export default function Scores() {
     "
     >
       <h1>Scores</h1>
-      <div className="h-full w-full">
+      <div className="h-52 w-full">
         <ResponsiveContainer>
           <BarChart data={sortedData}>
             <Bar dataKey="score" label={{ position: "top" }}>
