@@ -60,6 +60,11 @@ export default function Scores() {
           tickLine={false}
         />
       </BarChart>
+      <div className="animate-entry">
+        <br /><br />
+        <h1>The winner is {winner.name}!</h1>
+        <br /><br />
+      </div>
     </div>
   );
 }
