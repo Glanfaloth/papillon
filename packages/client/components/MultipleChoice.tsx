@@ -55,7 +55,7 @@ export const OptionBlock = ({
     >
       {showNumberBadge && (
         <span className="w-4 h-4">
-          <span className="animate-ping w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white  hidden md:block bg-blue-500 ">
+          <span className="animate-weakPing w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white  hidden md:block bg-blue-500 ">
             {index + 1}
           </span>
           <span className="w-4 h-4 rounded-full absolute -right-1 -top-1 leading text-xs text-white hidden md:block bg-blue-500">
