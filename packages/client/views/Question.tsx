@@ -123,7 +123,7 @@ export default function Question() {
       {widthPercentage == 0 && <div>
         <h2 className="mr-2">Great!</h2>
         <h3 className="text-gray-600 pt-8">
-          Now let us have a look  at other people's descriptions!
+          Now let us have a look at other people's descriptions!
         </h3>
       </div>
       }
