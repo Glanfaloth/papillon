@@ -208,7 +208,7 @@ export class MyRoom extends Room<MyRoomState> {
             };
 
             this.setState(new MyRoomState(state));
-          }, 20_000);
+          }, QUESTION_DURATION_SECONDS * 1000);
         }, 20_000);
       }
     } else {
