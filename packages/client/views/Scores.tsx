@@ -34,7 +34,10 @@ export default function Scores() {
 
   const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
   return (
-    <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
+    <div
+      className="shadow-xl bg-white p-8 rounded-xl w-full
+    "
+    >
       <h1>Scores</h1>
       <BarChart width={600} height={200} data={sortedData}>
         <Bar dataKey="score" label={{ position: "top" }}>
@@ -49,6 +52,8 @@ export default function Scores() {
           tickLine={false}
           axisLine={false}
           tick={false}
+          width={0}
+          hide={true}
         />
         <XAxis
           dataKey="name"
