@@ -4,16 +4,31 @@ import { ColyseusContext, useColyseus } from "../colyseus/use-room";
 import { Button, ButtonVariant } from "../components/Button";
 import { ProgressBar } from "../components/ProgressBar";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { WriteDescriptionData } from "@papillon/helpers/lib/types";
 
 export default function Question() {
   const [answer, setAnswer] = useState("");
   const disabled = !answer;
-  const [wordCount, setWordCount] = useState(0);
-  const wordList = ["hello", "world"];
-  const [submitted, setSubmitted] = useState(false);
-  var regexFromWordList = new RegExp(wordList.join("|"), "gi");
 
   const state: any = useContext(ColyseusContext);
+
+  const question = state.step.properties.userToQuestionData[
+    state.username
+  ] as WriteDescriptionData;
+
+  const similarWordList = [question.word, ...question.similarWords];
+  const regexFromWordList = new RegExp(similarWordList.join("|"), "gi");
+
+  const matchingSimilarWordCount =
+    answer.match(regexFromWordList) != null
+      ? answer.match(regexFromWordList).length
+      : 0;
+
+  const wordCount = answer.split(/s+/).length;
+
+  const score = 10 / (1 + 5 * Math.sqrt(matchingSimilarWordCount / (wordCount + 1)));
+
+  const [submitted, setSubmitted] = useState(false);
 
   const { sendMessage } = useColyseus();
 
@@ -21,6 +36,7 @@ export default function Question() {
     text = text
       .replace(/\n$/g, "\n\n")
       .replace(regexFromWordList, "<mark>$&</mark>");
+
     return text;
   }
 
@@ -31,8 +47,8 @@ export default function Question() {
         type: "submit-description",
         properties: {
           username: state.username ?? 0,
-          word: state.step.properties.userToQuestionData[state.username].word,
-          score: 0,
+          word: question.word,
+          score,
           description: answer,
         },
       });
@@ -67,10 +83,10 @@ export default function Question() {
           </h3>
           <div className="has-tooltip">
             <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
-              speak, say, talk
+              {question.englishSynonyms.join(', ')}
             </span>
             <div className="flex flex-row content-center">
-              <h2 className="mr-2">Sprechen</h2>
+              <h2 className="mr-2">{question.word}</h2>
               <h2>
                 <AiOutlineQuestionCircle className="text-blue-500" />
               </h2>
@@ -91,15 +107,12 @@ export default function Question() {
               value={answer}
               onChange={(e) => {
                 setAnswer(e.target.value);
-                answer.match(regexFromWordList) != null
-                  ? setWordCount(answer.match(regexFromWordList).length)
-                  : setWordCount(0);
               }}
             ></textarea>
           </div>
-          {wordCount > 0 && (
+          {matchingSimilarWordCount > 0 && (
             <h2 className="text-red-600">
-              {wordCount} words too similar, you'll be penalized.
+              {matchingSimilarWordCount} words too similar, you'll be penalized.
             </h2>
           )}
           <div className="mt-10">

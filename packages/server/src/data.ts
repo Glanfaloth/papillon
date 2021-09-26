@@ -4,18 +4,55 @@ import { WriteDescriptionData } from "@papillon/helpers/lib/types";
 export const writeDescriptionQuestions: WriteDescriptionData[] = [
   {
     word: "sprechen",
-    similarWords: ["sagen", "reden", "schwätzen", "plaudern", "diskutieren", "eklären", "kommunizieren"],
+    similarWords: [
+      "sagen",
+      "reden",
+      "schwätzen",
+      "plaudern",
+      "diskutieren",
+      "eklären",
+      "kommunizieren",
+    ],
+    englishSynonyms: ["speak", "say", "talk"],
   },
   {
     word: "schreiben",
-    similarWords: ["notieren", "kritzeln", "kratzeln", "verfassen", "Schreiber", "Kugelschreiber", "Bleistift"],
+    similarWords: [
+      "notieren",
+      "kritzeln",
+      "kratzeln",
+      "verfassen",
+      "Schreiber",
+      "Kugelschreiber",
+      "Bleistift",
+    ],
+    englishSynonyms: ['write']
   },
   {
     word: "essen",
-    similarWords: ["konsumieren", "sich ernähren", "speisen", "Essen", "Mahlzeit", "Snack", "knabbern"],
+    similarWords: [
+      "konsumieren",
+      "sich ernähren",
+      "speisen",
+      "Essen",
+      "Mahlzeit",
+      "Snack",
+      "knabbern",
+    ],
+    englishSynonyms: ['eat']
   },
   {
     word: "Onkel",
-    similarWords: ["Tante", "Cousin", "Cousine", "Bruder", "Schwester", "Ehemann", "Ehefrau", "Kinds"],
+    similarWords: [
+      "Tante",
+      "Cousin",
+      "Cousine",
+      "Bruder",
+      "Schwester",
+      "Ehemann",
+      "Ehefrau",
+      "Kinds",
+    ],
+    englishSynonyms: ['uncle']
   },
 ];

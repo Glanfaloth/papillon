@@ -52,10 +52,10 @@ export default function Choice() {
             properties: {
               username: state.username ?? 0,
               authorUsername: chooseWordData.authorUsername,
-              authorScore: 5,
-              word: chooseWordData.word,
+              authorScore: chooseWordData.word === o ? 5 : 0,
+              word: o,
               description: chooseWordData.userDescription,
-              score: 10,
+              score: chooseWordData.word === o ? 10 : 0,
             },
           });
         }}
