@@ -25,7 +25,7 @@ export default function Scores() {
     .map((u: any) => ({
       score: u[1].score,
       id: u[0],
-      username: u[0],
+      name: u[0],
     }))
     .filter((v) => v && v.id !== "undefined");
   useEffect(() => {
