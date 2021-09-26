@@ -35,7 +35,8 @@ textarea {
 .backdrop {
   position: absolute;
   z-index: 1;
-  border: 2px solid #685972;
+  /* border: 2px solid #685972; */
+  border: none;
   background-color: #fff;
   overflow: auto;
   pointer-events: none;
