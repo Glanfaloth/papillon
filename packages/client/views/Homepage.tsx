@@ -4,12 +4,12 @@ import { GiButterfly } from "react-icons/gi";
 import {
   ColyseusContext,
   MyContext,
-  useConnectColyseus
+  useConnectColyseus,
 } from "../colyseus/use-room";
 
 export default function Homepage({
   myContext: { context, setContext },
-  roomId
+  roomId,
 }: {
   myContext: MyContext;
   roomId: string;
@@ -22,34 +22,21 @@ export default function Homepage({
   const userSubmittedName = state.type === "connected";
 
   return (
-    <div className="shadow-xl bg-white p-8 rounded-xl w-full h-full	">
-      {/* Use this to render username form vs spinner */}
-      {/* {userSubmittedName ? "waiting" : "fill in form..."} */}
-
-      <div className="space-y-10">
-        <div className="inline-grid grid-cols-3 gap-x-2 items-center">
-          <span>
-            <GiButterfly className="float-right " />
-          </span>
-          <h1>Welcome to Papillon</h1>
-          <span>
-            <GiButterfly className="float-left " />
-          </span>
-          {/* Reference: https://codepen.io/dazulu/pen/aOzqvz */}
-          <span>
-            <div className="butterfly">
-              <div className="wing">
-                <div className="bit"></div>
-                <div className="bit"></div>
-              </div>
-              <div className="wing">
-                <div className="bit"></div>
-                <div className="bit"></div>
-              </div>
-            </div>
-            <div className="shadow"></div>
-          </span>
+    <div className="shadow-xl bg-white p-8 rounded-xl	flex">
+      <span className="py-12 my-12">
+        <div className="butterfly">
+          <div className="wing">
+            <div className="bit"></div>
+            <div className="bit"></div>
+          </div>
+          <div className="wing">
+            <div className="bit"></div>
+            <div className="bit"></div>
+          </div>
         </div>
+        <div className="shadow"></div>
+      </span>
+      <div className="space-y-4">
         <h3>What is your name?</h3>
         <input
           type="text"

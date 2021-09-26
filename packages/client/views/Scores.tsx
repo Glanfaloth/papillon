@@ -33,7 +33,7 @@ export default function Scores() {
     console.log("data updated", data);
   }, [data]);
 
-  const winner = _.maxBy(data, e => e.score)
+  const winner = _.maxBy(data, (e) => e.score);
 
   const sortedData = _.sortBy(data, (o: typeof data[0]) => o.id);
   return (
@@ -42,33 +42,40 @@ export default function Scores() {
     "
     >
       <h1>Scores</h1>
-      <BarChart width={600} height={200} data={sortedData}>
-        <Bar dataKey="score" label={{ position: "top" }}>
-          {data.map((entry, index) => (
-            <Cell fill={bar_color[index % 4]} key={`cell-${index}`} />
-          ))}
-        </Bar>
-        <YAxis
-          type="number"
-          domain={[0, "dataMax"]}
-          padding={{ top: 15 }}
-          tickLine={false}
-          axisLine={false}
-          tick={false}
-          width={0}
-          hide={true}
-        />
-        <XAxis
-          dataKey="name"
-          tick={{ stroke: "black", fill: "black" }}
-          axisLine={false}
-          tickLine={false}
-        />
-      </BarChart>
+      <div className="h-full w-full">
+        <ResponsiveContainer>
+          <BarChart data={sortedData}>
+            <Bar dataKey="score" label={{ position: "top" }}>
+              {data.map((entry, index) => (
+                <Cell fill={bar_color[index % 4]} key={`cell-${index}`} />
+              ))}
+            </Bar>
+            <YAxis
+              type="number"
+              domain={[0, "dataMax"]}
+              padding={{ top: 15 }}
+              tickLine={false}
+              axisLine={false}
+              tick={false}
+              width={0}
+              hide={true}
+            />
+            <XAxis
+              dataKey="name"
+              tick={{ stroke: "black", fill: "black" }}
+              axisLine={false}
+              tickLine={false}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
       <div className="animate-entry">
-        <br /><br />
+        <br />
+        <br />
         <h1>The winner is {winner.name}!</h1>
-        <br /><br />
+        <br />
+        <br />
       </div>
     </div>
   );
