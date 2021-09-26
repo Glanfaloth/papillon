@@ -31,92 +31,102 @@ export default function Question() {
     100 -
     Math.floor(
       (100 * (QUESTION_DURATION_SECONDS - (state.step?.remainingTime ?? 0))) /
-        QUESTION_DURATION_SECONDS
+      QUESTION_DURATION_SECONDS
     );
   const widthPercentage = (progressPercentage - 1) / 100 > 0 ? 100 : 0;
 
   return (
     <div className="shadow-xl bg-white p-8 rounded-xl w-full	">
-      <ProgressBar
+      {widthPercentage != 0 && <ProgressBar
         progressPercentage={widthPercentage}
         isDanger={progressPercentage < 20}
       />
+      }
 
-      <h3 className="text-gray-600 pt-8">
-        How would you describe the following word?
-      </h3>
-      <div className="has-tooltip">
-        <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
-          speak, say, talk
-        </span>
-        <div className="flex flex-row content-center">
-          <h2 className="mr-2">Sprechen</h2>
-          <h2>
-            <AiOutlineQuestionCircle className="text-blue-500" />
-          </h2>
+      {widthPercentage != 0 && <div>
+        <h3 className="text-gray-600 pt-8">
+          How would you describe the following word?
+        </h3>
+        <div className="has-tooltip">
+          <span className="tooltip rounded shadow-lg p-3 bg-gray-100 text-red-500 -mt-16">
+            speak, say, talk
+          </span>
+          <div className="flex flex-row content-center">
+            <h2 className="mr-2">Sprechen</h2>
+            <h2>
+              <AiOutlineQuestionCircle className="text-blue-500" />
+            </h2>
+          </div>
         </div>
-      </div>
-      <div className="container ">
-        <div className="backdrop">
-          <span
-            dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
-            className="highlights mt-0 mb-auto ml-0 mr-auto"
-          ></span>
-        </div>
-        <textarea
-          className={`border-gray-400 border-2 w-full ${
-            submitted && "text-gray-500"
-          }`}
-          name="description"
-          value={answer}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-            answer.match(regexFromWordList) != null
-              ? setWordCount(answer.match(regexFromWordList).length)
-              : setWordCount(0);
-          }}
-        ></textarea>
-      </div>
-      {wordCount > 0 && (
-        <h2 className="text-red-600">
-          {wordCount} words too similar, you'll be penalized.
-        </h2>
-      )}
-      <div className="mt-10">
-        {progressPercentage < 20 && !submitted && (
-          <Button
-            className={progressPercentage < 20 && "animate-weakPing"}
-            variant={
-              submitted ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY
-            }
-          >
-            Submit
-          </Button>
-        )}
-        <div className={progressPercentage < 20 && "absolute"}>
-          <Button
-            variant={submitted ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
-            onClick={() => {
-              if (!submitted) {
-                setSubmitted(true);
-                sendMessage({
-                  type: "submit-description",
-                  properties: {
-                    username: state.username ?? 0,
-                    word: state.step.properties.userToQuestionData[
-                      state.username
-                    ].word,
-                    score: 0,
-                    description: answer,
-                  },
-                });
-              }
+        <div className="container ">
+          <div className="backdrop">
+            <span
+              dangerouslySetInnerHTML={{ __html: applyHighlights(answer) }}
+              className="highlights mt-0 mb-auto ml-0 mr-auto"
+            ></span>
+          </div>
+          <textarea
+            className={`border-gray-400 border-2 w-full ${submitted && "text-gray-500"
+              }`}
+            name="description"
+            value={answer}
+            onChange={(e) => {
+              setAnswer(e.target.value);
+              answer.match(regexFromWordList) != null
+                ? setWordCount(answer.match(regexFromWordList).length)
+                : setWordCount(0);
             }}
-          >
-            Submit
-          </Button>
+          ></textarea>
+        </div>
+        {wordCount > 0 && (
+          <h2 className="text-red-600">
+            {wordCount} words too similar, you'll be penalized.
+          </h2>
+        )}
+        <div className="mt-10">
+          {progressPercentage < 20 && !submitted && (
+            <Button
+              className={progressPercentage < 20 && "animate-weakPing"}
+              variant={
+                submitted ? ButtonVariant.SECONDARY : ButtonVariant.PRIMARY
+              }
+            >
+              Submit
+            </Button>
+          )}
+          <div className={progressPercentage < 20 && "absolute"}>
+            <Button
+              variant={submitted ? ButtonVariant.DISABLED : ButtonVariant.PRIMARY}
+              onClick={() => {
+                if (!submitted) {
+                  setSubmitted(true);
+                  sendMessage({
+                    type: "submit-description",
+                    properties: {
+                      username: state.username ?? 0,
+                      word: state.step.properties.userToQuestionData[
+                        state.username
+                      ].word,
+                      score: 0,
+                      description: answer,
+                    },
+                  });
+                }
+              }}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </div>
+      }
+      {widthPercentage == 0 && <div>
+        <h2 className="mr-2">Great!</h2>
+        <h3 className="text-gray-600 pt-8">
+          Now let us have a look  at other people's descriptions!
+        </h3>
+      </div>
+      }
     </div>
   );
 }
