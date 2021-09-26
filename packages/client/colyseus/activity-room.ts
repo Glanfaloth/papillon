@@ -16,8 +16,10 @@ export class ActivityRoom {
   previousClientState: GlobalStateClient;
   username: string;
 
+  
   constructor() {
-    this.client = new Colyseus.Client("ws://localhost:2567");
+    console.log(window.location)
+    this.client = new Colyseus.Client(`ws://${window.location.hostname}:2567`);
   }
 
   connect = async ({ roomId, ...options }: JoinOptions): Promise<void> => {
