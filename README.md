@@ -6,6 +6,19 @@ As polyglots and language learners, we noticed the absence of multiplayer langua
 ## What it does
 Users join the platform and are matched by their level. They start a game consisting of two phases. During the first, each player must describe a target word and avoid a list of excluded words - like in the game called Taboo. In the second phase, the players must guess the corresponding word to a description given by someone else in the previous phase. This comes with a twist, as the options are likely to apply to the description before. Players get points by avoiding the excluded terms, guessing the word correctly, and writing descriptions that help others succeed in the second phase.
 
+## Demo
+(If you can't open YouTube, you can watch the same video on [Bilibili](https://www.bilibili.com/video/BV1Aq4y1P7D7))
+
+[![Demo](http://img.youtube.com/vi/f9rOpCXANqo/0.jpg)](http://www.youtube.com/watch?v=f9rOpCXANqo "Papillon")
+
+|The user describes the word while avoiding some excluded terms|
+|---|
+|![gallery](https://user-images.githubusercontent.com/52867627/156889615-da04276c-0df4-4912-8051-7b07680a91e3.jpeg)|
+|The user chooses the word best corresponding to the description|
+|![gallery1](https://user-images.githubusercontent.com/52867627/156889618-2033a3d4-dd90-4dfa-b455-d333c370316b.jpeg) |
+| Scores|
+|![gallery2](https://user-images.githubusercontent.com/52867627/156889619-1325f09a-b759-4d44-87a1-f1d0eb7d155f.jpeg)|
+
 ## How we built it
 We built the whole app using Typescript (Lerna monorepo). The frontend is in React.js, the backend is an Express.js server running the Colyseus multiplayer framework for synchronizing the game state between multiple users.
 
